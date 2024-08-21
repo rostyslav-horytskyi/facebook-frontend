@@ -1,0 +1,39 @@
+.LoginInput {
+  position: relative;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__input {
+    outline: none;
+    border: 1px solid var(--bg-third);
+    background: var(--bg-primary);
+    width: 100%;
+    height: 50px;
+    font-size: 17px;
+    border-radius: 10px;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    color: var(--color-primary);
+
+    &:focus {
+      border-color: var(--blue-color);
+    }
+
+    &--error {
+      border-color: #b94a48 !important;
+    }
+  }
+
+  i {
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    transform: scale(0.8);
+  }
+
+  @media (min-width: 850px) {
+    width: 360px !important;
+  }
+}

@@ -1,0 +1,114 @@
+.RegisterForm {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-primary);
+  box-shadow: 0 1px 2px var(--shadow-1);
+  border-radius: 10px;
+  padding: 15px;
+  padding-bottom: 1rem;
+  width: 350px;
+  height: fit-content;
+  color: var(--color-primary);
+
+  &__header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--bg-third);
+
+    i {
+      position: absolute;
+      right: 0;
+      cursor: pointer;
+    }
+
+    span:first-of-type {
+      font-weight: 700;
+      font-size: 32px;
+    }
+
+    span:last-of-type {
+      font-size: 15px;
+      color: var(--color-secondary);
+    }
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__line {
+    padding: 7px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    @media (min-width: 539px) {
+      flex-direction: row;
+    }
+  }
+
+  &__line-header {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-size: 13px;
+    color: var(--color-secondary);
+
+    i {
+      margin-top: 3px;
+    }
+  }
+
+  &__btn-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 10px 0;
+  }
+
+  &__column {
+    position: relative;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+
+  &__infos {
+    font-size: 11px;
+    margin-top: 10px;
+    color: var(--color-secondary);
+
+    span {
+      color: var(--blue-color);
+    }
+  }
+
+  &__signup {
+    background: var(--green-color);
+    width: 70% !important;
+    font-weight: 600 !important;
+    font-size: 17px !important;
+    margin-top: 1rem;
+  }
+
+  &__success {
+    color: var(--green-color);
+  }
+
+  &__error {
+    color: #b94a48;
+  }
+
+  @media (min-width: 539px) {
+    width: 400px;
+  }
+}

@@ -1,0 +1,55 @@
+.ErrorMessage {
+  position: relative;
+  padding: 15px 10px;
+  background: #b94a48;
+  width: 100%;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+
+  @media (min-width: 539px) {
+    max-width: 100% !important;
+  }
+
+  &--desktop {
+    position: absolute;
+    width: 300px;
+    left: -19.5rem;
+    top: -3px;
+  }
+
+  &__arrow--left {
+    border-left: 10px solid #b94a48;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    right: -10px;
+    top: 13px;
+  }
+
+  &__arrow--right {
+    border-right: 10px solid #b94a48;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    left: -10px;
+    top: 14px;
+  }
+
+  &__arrow--top {
+    border-top: 10px solid #b94a48;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    bottom: -10px;
+  }
+
+  &__arrow--bottom {
+    border-bottom: 10px solid #b94a48;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+  }
+}
