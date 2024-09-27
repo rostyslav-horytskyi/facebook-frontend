@@ -1,0 +1,23 @@
+.HeaderSearch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-forth);
+  padding: 10px 32px 10px 10px;
+  border-radius: 50px;
+  cursor: text;
+  z-index: 999;
+
+  &__input {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: 15px;
+    font-family: inherit;
+
+    &::placeholder {
+      transform: translateY(-1px);
+    }
+  }
+}

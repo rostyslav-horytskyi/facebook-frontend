@@ -1,0 +1,44 @@
+.AllMenu {
+  position: absolute;
+  right: -9rem;
+  top: 45px;
+  background: var(--bg-secondary);
+  border-radius: 10px;
+  height: 90vh;
+  width: 575px;
+  padding: 10px 1rem;
+  box-shadow: -2px 1px 5px 2px var(--shadow-1);
+  user-select: none;
+
+  &__header {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  &__wrap {
+    display: grid;
+    grid-template-columns: 1.7fr 1fr;
+    gap: 1rem;
+    overflow-y: auto;
+    height: 95%;
+
+    @media (max-width: 505px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 620px) {
+    width: 485px;
+  }
+
+  @media (max-width: 505px) {
+    width: 340px;
+    right: -9rem;
+  }
+
+  @media (max-width: 400px) {
+    left: -12.5rem;
+  }
+}

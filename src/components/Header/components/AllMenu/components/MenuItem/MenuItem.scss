@@ -1,0 +1,31 @@
+.MenuItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 5px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 10px;
+
+  img {
+    width: 36px;
+    height: 36px;
+    margin-right: 10px;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+
+    span:first-of-type {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    span:last-of-type {
+      font-size: 12px;
+      color: #65676b;
+      width: 95%;
+    }
+  }
+}

@@ -1,0 +1,46 @@
+.RightSection {
+  padding: 15px 10px;
+  background: var(--bg-primary);
+  margin-right: 1rem;
+  border-radius: 10px;
+  height: 550px;
+  width: 170px;
+  position: fixed;
+  right: 2rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  &__header {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-bottom: 2px;
+  }
+
+  &__circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-third);
+  }
+
+  @media (max-width: 505px) {
+    position: relative;
+    width: 100%;
+    padding-left: 3rem;
+    margin-bottom: 1rem;
+  }
+}
