@@ -1,17 +1,19 @@
 import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import DisplayAccessibility from './components/DisplayAccessibility/DisplayAccessibility';
 import HelpSupport from './components/HelpSupport/HelpSupport';
 import SettingsPrivacy from './components/SettingsPrivacy/SettingsPrivacy';
-import * as Styled from './UserMenu.styled';
 import { UserMenuItem } from './components/UserMenuItem/UserMenuItem';
 import { MenuMain } from './components/MenuMain/MenuMain';
 import { MENU_VIEWS } from './UserMenu.constants';
-import { HOVERS } from '../../../../constants';
+import { block } from '../../../../helpers/bem.helpers';
+import './UserMenu.scss';
+import { splitterBlock } from '../../Header.helpers';
+
+const b = block('UserMenu');
 
 export default function UserMenu({ user }) {
   const [visible, setVisible] = useState(MENU_VIEWS.MAIN);
-
-  console.log(visible);
 
   const userProfileLink = useMemo(
     () => `${user?.first_name} ${user?.last_name}`,
@@ -23,24 +25,24 @@ export default function UserMenu({ user }) {
   const handleNavigationToMain = () => setVisible(MENU_VIEWS.MAIN);
 
   return (
-    <Styled.Menu>
+    <div className={b()}>
       {visible === MENU_VIEWS.MAIN && (
         <>
-          <Styled.MenuHeader to="/profile" $hoverType={HOVERS.HOVER}>
+          <Link to="/profile" className={b('header').mix('hover')}>
             <img src={user?.picture} alt="User Profile" />
-            <Styled.MenuColumn>
+            <div className={b('column')}>
               <span>{userProfileLink}</span>
               <span>See your profile</span>
-            </Styled.MenuColumn>
-          </Styled.MenuHeader>
+            </div>
+          </Link>
 
-          <Styled.Splitter />
+          <div className={splitterBlock()} />
           <MenuMain
             iconClass="report_filled_icon"
             title="Give feedback"
             description="Help us improve Facebook"
           />
-          <Styled.Splitter />
+          <div className={splitterBlock()} />
           <UserMenuItem
             iconClass="settings_filled_icon"
             text="Settings & privacy"
@@ -73,6 +75,6 @@ export default function UserMenu({ user }) {
       {visible === MENU_VIEWS.DISPLAY_ACCESSIBILITY && (
         <DisplayAccessibility onNavigateToMain={handleNavigationToMain} />
       )}
-    </Styled.Menu>
+    </div>
   );
 }

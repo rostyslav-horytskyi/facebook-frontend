@@ -1,5 +1,4 @@
-import { MenuItemWrapper, SmallCircle } from '../../UserMenu.styled';
-import { HOVERS } from '../../../../../../constants';
+import { menuItemBlock, smallCircleBlock } from '../../../../Header.helpers';
 
 export const MenuItem = ({
   iconClass,
@@ -8,10 +7,10 @@ export const MenuItem = ({
   iconClass: string;
   children: React.ReactNode;
 }) => (
-  <MenuItemWrapper $hoverType={HOVERS.DEEP_HOVER}>
-    <SmallCircle>
+  <div className={`${menuItemBlock()} deep_hover`}>
+    <div className={smallCircleBlock()}>
       <i className={iconClass} />
-    </SmallCircle>
+    </div>
     {children}
-  </MenuItemWrapper>
+  </div>
 );

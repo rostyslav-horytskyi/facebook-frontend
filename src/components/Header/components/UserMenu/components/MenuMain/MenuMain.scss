@@ -1,0 +1,33 @@
+.MenuMain {
+  padding: 10px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    span:first-of-type {
+      color: $color-primary;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 1px;
+    }
+
+    span:last-of-type {
+      font-size: 14px;
+    }
+  }
+
+  &__title {
+    font-size: 14px !important;
+  }
+
+  &__description {
+    font-size: 12px !important;
+    color: $color-secondary;
+  }
+}

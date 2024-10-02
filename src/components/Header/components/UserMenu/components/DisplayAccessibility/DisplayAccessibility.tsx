@@ -1,10 +1,8 @@
-import { AbsoluteHeader, AbsoluteWrapper } from '../../UserMenu.styled';
 import { MenuMain } from '../MenuMain/MenuMain';
 import { RadioOption } from '../RadioOption/RadioOption';
 import { MenuItem } from '../MenuItem/MenuItem';
-import { Circle } from '../../../../Header.styled';
 import { RightArrow } from '../RighArrow/RightArrow';
-import { HOVERS } from '../../../../../../constants';
+import { absoluteBlock, circleBlock } from '../../../../Header.helpers';
 
 export default function DisplayAccessibility({
   onNavigateToMain,
@@ -12,17 +10,17 @@ export default function DisplayAccessibility({
   onNavigateToMain: () => void;
 }) {
   return (
-    <AbsoluteWrapper>
-      <AbsoluteHeader>
-        <Circle
+    <div className={absoluteBlock()}>
+      <div className={absoluteBlock('header')}>
+        <div
+          className={circleBlock().mix('hover')}
           onClick={onNavigateToMain}
           aria-label="Go back"
-          $hoverType={HOVERS.HOVER}
         >
           <i className="arrow_back_icon" />
-        </Circle>
+        </div>
         Display & Accessibility
-      </AbsoluteHeader>
+      </div>
       <MenuMain
         iconClass="dark_filled_icon"
         title="Dark Mode"
@@ -43,6 +41,6 @@ export default function DisplayAccessibility({
         <span>Keyboard</span>
         <RightArrow />
       </MenuItem>
-    </AbsoluteWrapper>
+    </div>
   );
 }

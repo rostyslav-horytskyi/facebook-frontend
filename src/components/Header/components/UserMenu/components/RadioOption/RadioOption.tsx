@@ -1,5 +1,7 @@
-import * as Styled from './RadioOption.styled';
-import { HOVERS } from '../../../../../../constants';
+import { block } from '../../../../../../helpers/bem.helpers';
+import './RadioOption.scss';
+
+const b = block('RadioOption');
 
 export const RadioOption = ({
   id,
@@ -10,8 +12,8 @@ export const RadioOption = ({
   name: string;
   label: string;
 }) => (
-  <Styled.Label htmlFor={id} $hoverType={HOVERS.HOVER}>
+  <label className={`${b()} hover`} htmlFor={id}>
     <span>{label}</span>
-    <Styled.Input type="radio" name={name} id={id} />
-  </Styled.Label>
+    <input type="radio" name={name} id={id} className={b('input')} />
+  </label>
 );

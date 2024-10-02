@@ -1,6 +1,5 @@
-import { MenuItemWrapper, SmallCircle } from '../../UserMenu.styled';
 import { RightArrow } from '../RighArrow/RightArrow';
-import { HOVERS } from '../../../../../../constants';
+import { menuItemBlock, smallCircleBlock } from '../../../../Header.helpers';
 
 export const UserMenuItem = ({
   iconClass,
@@ -11,11 +10,11 @@ export const UserMenuItem = ({
   text: string;
   onClick: () => void;
 }) => (
-  <MenuItemWrapper onClick={onClick} $hoverType={HOVERS.DEEP_HOVER}>
-    <SmallCircle>
+  <div onClick={onClick} className={`${menuItemBlock()} deep_hover`}>
+    <div className={smallCircleBlock()}>
       <i className={iconClass} />
-    </SmallCircle>
+    </div>
     <span>{text}</span>
     <RightArrow />
-  </MenuItemWrapper>
+  </div>
 );

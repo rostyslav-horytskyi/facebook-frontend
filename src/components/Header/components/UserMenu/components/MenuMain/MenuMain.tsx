@@ -1,5 +1,8 @@
-import { MenuColumn, SmallCircle } from '../../UserMenu.styled';
-import * as Styled from './MenuMain.styled';
+import { block } from '../../../../../../helpers/bem.helpers';
+import './MenuMain.scss';
+import { smallCircleBlock } from '../../../../Header.helpers';
+
+const menuMainBlock = block('MenuMain');
 
 export const MenuMain = ({
   iconClass,
@@ -12,13 +15,13 @@ export const MenuMain = ({
   description: string;
   iconStyles?: React.CSSProperties;
 }) => (
-  <Styled.Container>
-    <SmallCircle>
+  <div className={menuMainBlock()}>
+    <div className={smallCircleBlock()}>
       <i className={iconClass} style={iconStyles} />
-    </SmallCircle>
-    <MenuColumn>
-      <Styled.Title>{title}</Styled.Title>
-      <Styled.Description>{description}</Styled.Description>
-    </MenuColumn>
-  </Styled.Container>
+    </div>
+    <div className={menuMainBlock('column')}>
+      <span className={menuMainBlock('title')}>{title}</span>
+      <span className={menuMainBlock('description')}>{description}</span>
+    </div>
+  </div>
 );

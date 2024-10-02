@@ -1,8 +1,6 @@
-import { AbsoluteHeader, AbsoluteWrapper } from '../../UserMenu.styled';
-import { Circle } from '../../../../Header.styled';
 import { MenuItem } from '../MenuItem/MenuItem';
 import { menuItems } from './SettingsPrivacy.utils';
-import { HOVERS } from '../../../../../../constants';
+import { absoluteBlock, circleBlock } from '../../../../Header.helpers';
 
 export default function SettingsPrivacy({
   onNavigateToMain,
@@ -10,18 +8,18 @@ export default function SettingsPrivacy({
   onNavigateToMain: () => void;
 }) {
   return (
-    <AbsoluteWrapper>
-      <AbsoluteHeader>
-        <Circle onClick={onNavigateToMain} $hoverType={HOVERS.HOVER}>
+    <div className={absoluteBlock()}>
+      <div className={absoluteBlock('header')}>
+        <div onClick={onNavigateToMain} className={circleBlock().mix('hover')}>
           <i className="arrow_back_icon" />
-        </Circle>
+        </div>
         Settings & privacy
-      </AbsoluteHeader>
+      </div>
       {menuItems.map((item) => (
         <MenuItem key={item.icon} iconClass={item.icon}>
           <span>{item.label}</span>
         </MenuItem>
       ))}
-    </AbsoluteWrapper>
+    </div>
   );
 }

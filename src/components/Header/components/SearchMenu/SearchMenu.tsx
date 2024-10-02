@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { Return } from '../../../../svg';
 import './SearchMenu.scss';
 import { block } from '../../../../helpers/bem.helpers';
-import { Circle } from '../../Header.styled';
+import { circleBlock } from '../../Header.helpers';
 
 const b = block('SearchMenu');
 
@@ -19,9 +19,9 @@ export const SearchMenu = ({
     <div className={b()} ref={menu}>
       <div className={b('wrap')}>
         <div className={b('header-logo')}>
-          <Circle className="hover" onClick={onClose}>
+          <div onClick={onClose} className={circleBlock().mix('hover')}>
             <Return color={color} />
-          </Circle>
+          </div>
         </div>
       </div>
       <div className={b('history-header')}>
