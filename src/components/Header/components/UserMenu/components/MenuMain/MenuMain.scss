@@ -6,15 +6,10 @@
   gap: 5px;
 
   &__column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @include flex-center-column;
 
     span:first-of-type {
-      color: $color-primary;
-      font-weight: 600;
-      font-size: 15px;
-      letter-spacing: 1px;
+      @include menu-main-first-column-item;
     }
 
     span:last-of-type {

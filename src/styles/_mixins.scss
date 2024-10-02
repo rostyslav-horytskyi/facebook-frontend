@@ -1,0 +1,12 @@
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin menu-main-first-column-item {
+  color: $color-primary;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
