@@ -9,7 +9,7 @@ export default function AllMenu() {
   return (
     <div className={b()}>
       <div className={b('header')}>Menu</div>
-      <div className={b('wrap').mix('scrollbar')}>
+      <div className={`${b('wrap')} hover`}>
         <LeftSection />
         <RightSection />
       </div>

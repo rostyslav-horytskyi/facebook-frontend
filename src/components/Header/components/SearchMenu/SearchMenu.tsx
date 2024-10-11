@@ -19,7 +19,7 @@ export const SearchMenu = ({
     <div className={b()} ref={menu}>
       <div className={b('wrap')}>
         <div className={b('header-logo')}>
-          <div onClick={onClose} className={circleBlock().mix('hover')}>
+          <div onClick={onClose} className={`${circleBlock()} hover`}>
             <Return color={color} />
           </div>
         </div>

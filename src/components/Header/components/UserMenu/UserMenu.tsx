@@ -28,7 +28,7 @@ export default function UserMenu({ user }) {
     <div className={b()}>
       {visible === MENU_VIEWS.MAIN && (
         <>
-          <Link to="/profile" className={b('header').mix('hover')}>
+          <Link to="/profile" className={`${b('header')} hover`}>
             <img src={user?.picture} alt="User Profile" />
             <div className={b('column')}>
               <span>{userProfileLink}</span>

@@ -66,10 +66,13 @@ a {
 
 /*----Hovers----*/
 .hover:hover {
-  background: var(--bg-secondary);
+  background: $bg-secondary;
+}
+.middle_hover:hover {
+  background: $bg-third;
 }
 .deep_hover:hover {
-  background: var(--bg-third);
+  background: #d4d6da3a;
 }
 /*----Hovers----*/
 

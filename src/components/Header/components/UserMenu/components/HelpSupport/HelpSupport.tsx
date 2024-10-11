@@ -10,7 +10,7 @@ export default function HelpSupport({
   return (
     <div className={absoluteBlock()}>
       <div className={absoluteBlock('header')}>
-        <div onClick={onNavigateToMain} className={circleBlock().mix('hover')}>
+        <div onClick={onNavigateToMain} className={`${circleBlock()} hover`}>
           <i className="arrow_back_icon" />
         </div>
         Help & Support

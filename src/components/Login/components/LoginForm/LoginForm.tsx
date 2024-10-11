@@ -91,7 +91,7 @@ export default function LoginForm() {
           )}
           <div className={b('splitter')} />
           <button
-            className={b('open-signup').mix('blue_btn')}
+            className={`${b('open-signup')} blue_btn`}
             onClick={() => setRegisterFormVisible(true)}
           >
             Create Account

@@ -13,7 +13,7 @@ export default function DisplayAccessibility({
     <div className={absoluteBlock()}>
       <div className={absoluteBlock('header')}>
         <div
-          className={circleBlock().mix('hover')}
+          className={`${circleBlock()} hover`}
           onClick={onNavigateToMain}
           aria-label="Go back"
         >

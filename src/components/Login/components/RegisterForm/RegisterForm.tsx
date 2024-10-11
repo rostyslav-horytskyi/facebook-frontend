@@ -155,9 +155,7 @@ export default function RegisterForm() {
                   notifications from us and can opt out at any time.
                 </div>
                 <div className={b('btn-wrapper')}>
-                  <button className={b('signup').mix('blue_btn')}>
-                    Sign Up
-                  </button>
+                  <button className={`${b('signup')} blue_btn`}>Sign Up</button>
                 </div>
                 <DotLoader color="#1876f2" loading={isMutating} size={30} />
                 {error && (

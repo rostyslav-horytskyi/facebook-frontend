@@ -15,7 +15,7 @@ export const MenuMain = ({
   description: string;
   iconStyles?: React.CSSProperties;
 }) => (
-  <div className={menuMainBlock()}>
+  <div className={`${menuMainBlock()} deep_hover`}>
     <div className={smallCircleBlock()}>
       <i className={iconClass} style={iconStyles} />
     </div>

@@ -46,22 +46,22 @@ const Header = () => {
         <Link to="/" className={b('navigation-icon', { active: true })}>
           <HomeActive />
         </Link>
-        <Link to="/" className={b('navigation-icon').mix('hover')}>
+        <Link to="/" className={`${b('navigation-icon')} hover`}>
           <Friends color="#65676b" />
         </Link>
-        <Link to="/" className={b('navigation-icon').mix('hover')}>
+        <Link to="/" className={`${b('navigation-icon')} hover`}>
           <Watch color="#65676b" />
           <div className={b('middle-notification')}>+9</div>
         </Link>
-        <Link to="/" className={b('navigation-icon').mix('hover')}>
+        <Link to="/" className={`${b('navigation-icon')} hover`}>
           <Market color="#65676b" />
         </Link>
-        <Link to="/" className={b('navigation-icon').mix('hover')}>
+        <Link to="/" className={`${b('navigation-icon')} hover`}>
           <Gaming color="#65676b" />
         </Link>
       </div>
       <div className={b('right')}>
-        <Link to="/profile" className={b('profile-link').mix('hover')}>
+        <Link to="/profile" className={`${b('profile-link')} hover`}>
           <img
             src={user?.picture}
             alt="Profile"
@@ -69,7 +69,7 @@ const Header = () => {
           />
           <span>{user?.first_name}</span>
         </Link>
-        <div className={b('circle-icon').mix('hover')}>
+        <div className={`${b('circle-icon')} hover`}>
           <Menu onClick={() => setMenu('all')} />
           {menu === 'all' && (
             <OutsideClickHandler onOutsideClick={handleOutsideClick}>
@@ -77,14 +77,14 @@ const Header = () => {
             </OutsideClickHandler>
           )}
         </div>
-        <div className={b('circle-icon').mix('hover')}>
+        <div className={`${b('circle-icon')} hover`}>
           <Messenger />
         </div>
-        <div className={b('circle-icon').mix('hover')}>
+        <div className={`${b('circle-icon')} hover`}>
           <Notifications />
           <div className={b('right-notification')}>5</div>
         </div>
-        <div className={b('circle-icon').mix('hover')}>
+        <div className={`${b('circle-icon')} hover`}>
           <ArrowDown onClick={() => setMenu('user')} />
           {menu === 'user' && (
             <OutsideClickHandler onOutsideClick={handleOutsideClick}>

@@ -3,11 +3,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-forth);
+  background: $bg-forth;
   padding: 10px 32px 10px 10px;
   border-radius: 50px;
   cursor: text;
   z-index: 999;
+  height: 40px;
 
   &__input {
     outline: none;
@@ -19,5 +20,34 @@
     &::placeholder {
       transform: translateY(-1px);
     }
+
+    @media (max-width: 1040px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1040px) {
+    width: 40px;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+/* Override styles when .HeaderSearch--menu-visible is applied */
+.HeaderSearch--menu-visible {
+  top: 8px;
+  position: absolute;
+  width: auto;
+  justify-content: flex-start;
+  padding: 10px 32px 10px 10px;
+
+  & .HeaderSearch__input {
+    display: block;
+  }
+
+  /* Cancel out the media query */
+  @media (max-width: 1040px) {
+    width: auto;
+    padding: 10px 32px 10px 10px;
   }
 }
