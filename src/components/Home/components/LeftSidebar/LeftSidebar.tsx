@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import './LeftSidebar.scss';
 // eslint-disable-next-line camelcase
@@ -11,18 +11,39 @@ import {
   smallCircleBlock,
   splitterBlock,
 } from '../../../../helpers/bem.helpers';
+import { Copyright } from './components/Copyright/Copyright';
+import { shortcuts } from './LeftSidebar.utils';
 
 const b = block('LeftSidebar');
 
-export function LeftSidebar({ user }) {
+type LeftSidebarProps = {
+  user: {
+    picture: string;
+    first_name: string;
+    last_name: string;
+  };
+};
+
+export const LeftSidebar = memo(({ user }: LeftSidebarProps) => {
   const [visible, setVisible] = useState(false);
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      setVisible((prev) => !prev);
+    }
+  };
+
+  if (!user) {
+    return <div className={b()}>Loading...</div>;
+  }
 
   return (
     <div className={`${b()} scrollbar`}>
       <Link to="/profile" className={`${b('profile-link')} hover1`}>
         <img
-          src={user?.picture}
-          alt={`${user?.first_name} ${user?.last_name}`}
+          src={user.picture}
+          alt={`${user.first_name} ${user.last_name}`}
+          loading="lazy"
         />
         <span className={b('username')}>
           {user?.first_name} {user?.last_name}
@@ -43,6 +64,10 @@ export function LeftSidebar({ user }) {
         <div
           className={`${b('see-more')} hover1`}
           onClick={() => setVisible(true)}
+          onKeyPress={handleKeyPress}
+          role="button"
+          aria-label="See more sidebar items"
+          tabIndex={0}
         >
           <div className={smallCircleBlock()}>
             <ArrowDown1 />
@@ -65,6 +90,10 @@ export function LeftSidebar({ user }) {
           <div
             className={`${b('show-less')} hover1`}
             onClick={() => setVisible(false)}
+            onKeyPress={handleKeyPress}
+            role="button"
+            aria-label="Show less sidebar items"
+            tabIndex={0}
           >
             <div className={`${smallCircleBlock()} rotate360`}>
               <ArrowDown1 />
@@ -82,34 +111,12 @@ export function LeftSidebar({ user }) {
       </div>
 
       <div className={b('shortcut-list')}>
-        <Shortcut
-          link="https://www.youtube.com/c/MohamedHaJJi1/featured"
-          img="../../images/ytb.png"
-          name="My Youtube channel"
-        />
-        <Shortcut
-          link="https://www.instagram.com/med_hajji7/"
-          img="../../images/insta.png"
-          name="My Instagram"
-        />
+        {shortcuts.map((shortcut) => (
+          <Shortcut key={shortcut.link} {...shortcut} />
+        ))}
       </div>
 
-      <div className={`fb-copyright ${visible ? 'relative' : ''}`}>
-        <Link to="/">Privacy </Link>
-        <span>. </span>
-        <Link to="/">Terms </Link>
-        <span>. </span>
-        <Link to="/">Advertising </Link>
-        <span>. </span>
-        <Link to="/">
-          Ad Choices <i className="ad-choices-icon" />
-        </Link>
-        <span>. </span>
-        <Link to="/">Cookies</Link> <span>. </span>
-        <Link to="/">More </Link>
-        <span>. </span> <br />
-        Meta © 2022
-      </div>
+      <Copyright visible={visible} />
     </div>
   );
-}
+});

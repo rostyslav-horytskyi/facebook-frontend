@@ -1,16 +1,38 @@
+$breakpoint-large: 1030px;
+$breakpoint-medium: 805px;
+$breakpoint-small: 620px;
+
+$sidebar-width: 15vw;
+$sidebar-width-collapsed: 70px;
+
 .LeftSidebar {
   position: fixed;
   margin-top: 58px;
   left: 6px;
   max-height: 100vh;
-  width: 15vw;
+  width: $sidebar-width;
   overflow-y: auto;
   color: $color-primary;
   padding: 15px 0;
   padding-bottom: 5rem;
   user-select: none;
 
-  &__profile-link {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ced0d4;
+    border-radius: 4px;
+  }
+
+  &:hover::-webkit-scrollbar-thumb {
+    background: #bcc0c4;
+  }
+
+  &__profile-link,
+  &__see-more,
+  &__show-less {
     display: flex;
     align-items: center;
     padding: 5px 10px;
@@ -19,7 +41,18 @@
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 2px;
+    transition: background-color 0.2s ease;
 
+    &:hover {
+      background-color: var(--hover-overlay);
+    }
+
+    &:active {
+      background-color: var(--hover-overlay-darker);
+    }
+  }
+
+  &__profile-link {
     img {
       width: 36px;
       height: 36px;
@@ -34,23 +67,13 @@
     }
   }
 
-  &__see-more,
-  &__show-less {
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 2px;
-  }
-
   &__more {
     margin-top: 10px;
   }
 
   .SmallCircle {
+    transition: transform 0.3s ease;
+
     &.rotate360 {
       transform: rotate(180deg);
     }
@@ -64,19 +87,20 @@
     &-heading {
       font-size: 16px;
       font-weight: 600;
-      color: var(--color-secondary);
+      color: $color-secondary;
       padding: 13px 10px 11px 10px;
     }
 
     &-edit {
       font-size: 14px;
-      color: var(--blue-color);
-      display: none;
+      color: $blue-color;
+      opacity: 0;
+      transition: opacity 0.2s ease;
       cursor: pointer;
     }
 
     &:hover &-edit {
-      display: block;
+      opacity: 1;
     }
   }
 
@@ -84,54 +108,51 @@
     margin-top: 10px;
   }
 
-  .fb-copyright {
-    background-color: #fff;
-    position: fixed;
-    bottom: 0;
-    left: 10px;
-    font-size: 12px;
-    color: $color-secondary;
-    width: 100%;
-    max-width: 14vw;
-    padding: 5px 0;
-
-    &.relative {
-      position: relative;
-      width: 97%;
-      margin-top: 2rem;
+  &__see-more,
+  &__show-less,
+  &__shortcuts-edit {
+    &:focus-visible {
+      outline: 2px solid $blue-color;
+      outline-offset: 2px;
     }
   }
 }
 
-@media (max-width: 1030px) {
-  .left-sidebar__shortcuts,
-  .splitter,
-  .fb-copyright {
-    display: none;
-  }
+@media (max-width: $breakpoint-large) {
+  .LeftSidebar {
+    width: $sidebar-width-collapsed;
 
-  .left-sidebar {
-    width: 70px;
+    &__shortcuts,
+    .Splitter,
+    .Copyright {
+      display: none;
+    }
 
     &__profile-link {
-      background: var(--bg-third);
+      background: $bg-third;
       width: 55px;
       height: 55px;
       border-radius: 50%;
       display: grid;
       place-items: center;
+
+      span {
+        display: none;
+      }
     }
   }
 }
 
-@media (max-width: 805px) {
-  .left-sidebar::-webkit-scrollbar {
-    display: none;
+@media (max-width: $breakpoint-medium) {
+  .LeftSidebar {
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
-@media (max-width: 620px) {
-  .left-sidebar {
+@media (max-width: $breakpoint-small) {
+  .LeftSidebar {
     display: none;
   }
 }

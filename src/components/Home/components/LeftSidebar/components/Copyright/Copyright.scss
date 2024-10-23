@@ -1,0 +1,17 @@
+.Copyright {
+  background-color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 10px;
+  font-size: 12px;
+  color: $color-secondary;
+  width: 100%;
+  max-width: 14vw;
+  padding: 5px 0;
+
+  &--relative {
+    position: relative;
+    width: 97%;
+    margin-top: 2rem;
+  }
+}
