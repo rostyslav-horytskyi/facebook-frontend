@@ -1,0 +1,65 @@
+.SidebarItem {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-right: 11px;
+    vertical-align: -0.25em;
+  }
+
+  span {
+    margin-bottom: 4px;
+    margin-left: 1px;
+
+    @media (max-width: 1030px) {
+      display: none;
+    }
+  }
+
+  &__column {
+    margin-left: 2px;
+    transform: translateY(-2px);
+  }
+
+  &__text {
+    transform: translateX(-1px);
+  }
+
+  &__notification {
+    position: relative;
+    font-size: 12px;
+    color: $blue-color;
+    margin-left: 9px;
+    margin-top: 2px;
+    font-weight: normal;
+
+    &::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: $blue-color;
+      position: absolute;
+      left: -10px;
+      bottom: 2px;
+    }
+  }
+
+  @media (max-width: 1030px) {
+    background: $bg-third;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+  }
+}

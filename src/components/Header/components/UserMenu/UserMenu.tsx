@@ -6,9 +6,8 @@ import SettingsPrivacy from './components/SettingsPrivacy/SettingsPrivacy';
 import { UserMenuItem } from './components/UserMenuItem/UserMenuItem';
 import { MenuMain } from './components/MenuMain/MenuMain';
 import { MENU_VIEWS } from './UserMenu.constants';
-import { block } from '../../../../helpers/bem.helpers';
+import { block, splitterBlock } from '../../../../helpers/bem.helpers';
 import './UserMenu.scss';
-import { splitterBlock } from '../../Header.helpers';
 
 const b = block('UserMenu');
 

@@ -1,6 +1,5 @@
-import { block } from '../../../../../../helpers/bem.helpers';
+import { block, smallCircleBlock } from '../../../../../../helpers/bem.helpers';
 import './MenuMain.scss';
-import { smallCircleBlock } from '../../../../Header.helpers';
 
 const menuMainBlock = block('MenuMain');
 

@@ -1,5 +1,8 @@
 import { RightArrow } from '../RighArrow/RightArrow';
-import { menuItemBlock, smallCircleBlock } from '../../../../Header.helpers';
+import {
+  menuItemBlock,
+  smallCircleBlock,
+} from '../../../../../../helpers/bem.helpers';
 
 export const UserMenuItem = ({
   iconClass,

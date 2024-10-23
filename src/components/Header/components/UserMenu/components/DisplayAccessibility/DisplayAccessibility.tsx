@@ -2,7 +2,10 @@ import { MenuMain } from '../MenuMain/MenuMain';
 import { RadioOption } from '../RadioOption/RadioOption';
 import { MenuItem } from '../MenuItem/MenuItem';
 import { RightArrow } from '../RighArrow/RightArrow';
-import { absoluteBlock, circleBlock } from '../../../../Header.helpers';
+import {
+  absoluteBlock,
+  circleBlock,
+} from '../../../../../../helpers/bem.helpers';
 
 export default function DisplayAccessibility({
   onNavigateToMain,

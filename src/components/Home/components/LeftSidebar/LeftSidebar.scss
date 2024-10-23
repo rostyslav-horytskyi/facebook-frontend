@@ -1,0 +1,137 @@
+.LeftSidebar {
+  position: fixed;
+  margin-top: 58px;
+  left: 6px;
+  max-height: 100vh;
+  width: 15vw;
+  overflow-y: auto;
+  color: $color-primary;
+  padding: 15px 0;
+  padding-bottom: 5rem;
+  user-select: none;
+
+  &__profile-link {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 11px;
+      vertical-align: -0.25em;
+    }
+
+    span {
+      margin-bottom: 4px;
+      margin-left: 1px;
+    }
+  }
+
+  &__see-more,
+  &__show-less {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  &__more {
+    margin-top: 10px;
+  }
+
+  .SmallCircle {
+    &.rotate360 {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__shortcuts {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &-heading {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-secondary);
+      padding: 13px 10px 11px 10px;
+    }
+
+    &-edit {
+      font-size: 14px;
+      color: var(--blue-color);
+      display: none;
+      cursor: pointer;
+    }
+
+    &:hover &-edit {
+      display: block;
+    }
+  }
+
+  &__shortcut-list {
+    margin-top: 10px;
+  }
+
+  .fb-copyright {
+    background-color: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 10px;
+    font-size: 12px;
+    color: $color-secondary;
+    width: 100%;
+    max-width: 14vw;
+    padding: 5px 0;
+
+    &.relative {
+      position: relative;
+      width: 97%;
+      margin-top: 2rem;
+    }
+  }
+}
+
+@media (max-width: 1030px) {
+  .left-sidebar__shortcuts,
+  .splitter,
+  .fb-copyright {
+    display: none;
+  }
+
+  .left-sidebar {
+    width: 70px;
+
+    &__profile-link {
+      background: var(--bg-third);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+    }
+  }
+}
+
+@media (max-width: 805px) {
+  .left-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .left-sidebar {
+    display: none;
+  }
+}

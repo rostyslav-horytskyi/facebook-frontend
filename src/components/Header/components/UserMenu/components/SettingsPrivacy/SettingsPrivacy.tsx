@@ -1,6 +1,9 @@
 import { MenuItem } from '../MenuItem/MenuItem';
 import { menuItems } from './SettingsPrivacy.utils';
-import { absoluteBlock, circleBlock } from '../../../../Header.helpers';
+import {
+  absoluteBlock,
+  circleBlock,
+} from '../../../../../../helpers/bem.helpers';
 
 export default function SettingsPrivacy({
   onNavigateToMain,

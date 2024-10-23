@@ -1,8 +1,7 @@
 import { useRef } from 'react';
 import { Return } from '../../../../svg';
 import './SearchMenu.scss';
-import { block } from '../../../../helpers/bem.helpers';
-import { circleBlock } from '../../Header.helpers';
+import { block, circleBlock } from '../../../../helpers/bem.helpers';
 
 const b = block('SearchMenu');
 
