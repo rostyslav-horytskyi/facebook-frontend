@@ -1,0 +1,41 @@
+.Contacts {
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0 7px 10px;
+    font-weight: 600;
+    color: $color-secondary;
+  }
+
+  &__header-right {
+    @extend .Contacts__header;
+    padding: 0;
+    position: absolute;
+    right: -9px;
+    top: 7px;
+    gap: 6px;
+  }
+
+  &__circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 1px;
+    }
+    &:nth-child(3) {
+      margin-top: -1px;
+    }
+  }
+
+  &__list {
+    padding: 5px;
+  }
+}

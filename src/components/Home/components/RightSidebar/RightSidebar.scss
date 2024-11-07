@@ -1,0 +1,20 @@
+.RightSidebar {
+  position: fixed;
+  left: 80.7vw;
+  top: 4rem;
+  width: 17vw;
+
+  &__heading {
+    font-size: 16px;
+    font-weight: 600;
+    color: $color-secondary;
+    padding: 13px 10px 11px 10px;
+  }
+
+  &__splitter {
+    height: 1.3px;
+    background: $divider;
+    width: 17vw;
+    margin: 6px 2px 0 12px;
+  }
+}
