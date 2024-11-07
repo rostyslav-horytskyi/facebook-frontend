@@ -3,12 +3,12 @@
   top: 0;
   height: 56px;
   z-index: 99;
-  background: var(--bg-primary);
+  background: $bg-primary;
   width: 100%;
-  box-shadow: 1px 8px 15px -7px var(--shadow-2);
+  box-shadow: 1px 8px 15px -7px $shadow-2;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  color: var(--color-primary);
+  color: $color-primary;
 
   &__left {
     display: flex;
@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background: var(--bg-forth);
+    background: $bg-forth;
     padding: 10px 32px 10px 10px;
     border-radius: 50px;
     cursor: text;
@@ -73,7 +73,7 @@
     transform: translateY(-2px);
 
     &--active {
-      border-bottom: 3px solid var(--blue-color);
+      border-bottom: 3px solid $blue-color;
       border-radius: 0;
       height: 56px;
       transform: translateX(0);
@@ -184,7 +184,7 @@
     justify-content: center;
     margin-right: 8px;
     cursor: pointer;
-    background: var(--bg-third);
+    background: $bg-third;
 
     &:nth-child(3) {
       @media (max-width: 400px) {

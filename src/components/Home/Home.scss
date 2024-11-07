@@ -1,0 +1,6 @@
+.Home {
+  min-height: 100vh;
+  background: $bg-secondary;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
