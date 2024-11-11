@@ -1,6 +1,5 @@
 import { Formik, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-import DotLoader from 'react-spinners/DotLoader';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import LoginInput from '../LoginInput/LoginInput';
@@ -10,6 +9,9 @@ import { loginValidation } from './LoginForm.validations';
 import { block } from '../../../../helpers/bem.helpers';
 import { login } from '../../../../store/slices/userSlice';
 import './LoginForm.scss';
+import { FormButton } from '../shared/FormButton';
+import { LoadingSpinner } from '../shared/LoadingSpinner';
+import { ErrorDisplay } from '../shared/ErrorDisplay';
 
 const b = block('LoginForm');
 
@@ -73,29 +75,22 @@ export default function LoginForm() {
                   value={values.password}
                   bottom
                 />
-                <button type="submit" className="blue_btn">
-                  Log In
-                </button>
+                <FormButton type="submit">Log In</FormButton>
               </Form>
             )}
           </Formik>
           <Link to="/forgot" className={b('forgot-password')}>
             Forgotten password?
           </Link>
-          <DotLoader color="#1876f2" loading={isMutating} size={30} />
-
-          {error && (
-            <div className={b('error')}>
-              {error.response?.data?.message || error.message}
-            </div>
-          )}
+          <LoadingSpinner loading={isMutating} />
+          <ErrorDisplay error={error} className={b('error')} />
           <div className={b('splitter')} />
-          <button
+          <FormButton 
             className={`${b('open-signup')} blue_btn`}
             onClick={() => setRegisterFormVisible(true)}
           >
             Create Account
-          </button>
+          </FormButton>
         </div>
         <Link to="/" className={b('sign-extra')}>
           <b>Create a Page</b> for a celebrity, brand or business.

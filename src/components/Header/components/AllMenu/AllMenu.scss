@@ -2,12 +2,12 @@
   position: absolute;
   right: -9rem;
   top: 45px;
-  background: var(--bg-secondary);
+  background: $bg-secondary;
   border-radius: 10px;
   height: 90vh;
   width: 575px;
   padding: 10px 1rem;
-  box-shadow: -2px 1px 5px 2px var(--shadow-1);
+  box-shadow: -2px 1px 5px 2px $shadow-1;
   user-select: none;
 
   &__header {

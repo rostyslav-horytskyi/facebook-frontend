@@ -44,11 +44,11 @@ $sidebar-width-collapsed: 70px;
     transition: background-color 0.2s ease;
 
     &:hover {
-      background-color: var(--hover-overlay);
+      background-color: white;
     }
 
     &:active {
-      background-color: var(--hover-overlay-darker);
+      background-color: grey;
     }
   }
 

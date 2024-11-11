@@ -1,5 +1,4 @@
 import { Form, Formik } from 'formik';
-import DotLoader from 'react-spinners/DotLoader';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +14,9 @@ import { block } from '../../../../helpers/bem.helpers';
 import { useLogin } from '../../Login.context';
 import { login } from '../../../../store/slices/userSlice';
 import './RegisterForm.scss';
+import { FormButton } from '../shared/FormButton';
+import { LoadingSpinner } from '../shared/LoadingSpinner';
+import { ErrorDisplay } from '../shared/ErrorDisplay';
 
 const b = block('RegisterForm');
 
@@ -155,14 +157,12 @@ export default function RegisterForm() {
                   notifications from us and can opt out at any time.
                 </div>
                 <div className={b('btn-wrapper')}>
-                  <button className={`${b('signup')} blue_btn`}>Sign Up</button>
+                  <FormButton type="submit" className={`${b('signup')} blue_btn`}>
+                    Sign Up
+                  </FormButton>
                 </div>
-                <DotLoader color="#1876f2" loading={isMutating} size={30} />
-                {error && (
-                  <div className={b('error')}>
-                    {error.response?.data?.message || error.message}
-                  </div>
-                )}
+                <LoadingSpinner loading={isMutating} />
+                <ErrorDisplay error={error} className={b('error')} />
                 {success && <div className={b('success')}>{success}</div>}
               </Form>
             );

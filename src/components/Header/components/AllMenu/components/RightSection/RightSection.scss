@@ -1,6 +1,6 @@
 .RightSection {
   padding: 15px 10px;
-  background: var(--bg-primary);
+  background: $bg-primary;
   margin-right: 1rem;
   border-radius: 10px;
   height: 550px;
@@ -34,7 +34,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-third);
+    background: $bg-third;
   }
 
   @media (max-width: 505px) {
