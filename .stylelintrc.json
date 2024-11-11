@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-prettier/recommended"
+  ],
+  "rules": {
+    "indentation": [2, { "ignore": ["value"] }],
+    "no-empty-source": null,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
+    "block-no-empty": true
+  }
+}
