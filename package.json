@@ -32,7 +32,9 @@
     "build": "vite build",
     "serve": "vite preview",
     "lint:styles": "stylelint '**/*.{scss,ts,tsx}' --fix --config .stylelintrc.json",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "type-check": "tsc --noEmit"
   },
   "lint-staged": {
     "*.ts?(x)": [
