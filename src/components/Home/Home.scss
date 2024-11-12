@@ -3,4 +3,33 @@
   background: $bg-secondary;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+
+  &__middle {
+    margin-top: 75px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    @media (max-width: 1175px) {
+      margin-left: 5%;
+    }
+
+    @media (max-width: 1030px) {
+      position: relative;
+      margin-left: 55px;
+    }
+
+    @media (max-width: 960px) {
+      margin-left: 10%;
+    }
+
+    @media (max-width: 885px) {
+      margin-left: 9%;
+    }
+
+    @media (max-width: 620px) {
+      position: absolute;
+      margin-left: 0;
+    }
+  }
 }

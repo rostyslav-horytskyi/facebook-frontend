@@ -1,0 +1,55 @@
+.Stories {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(6, 105px);
+  gap: 10px;
+  padding: 6px 0;
+
+  &__circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $bg-primary;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -5px;
+    box-shadow: 1px 2px $shadow-1;
+    cursor: pointer;
+
+    @media (max-width: 805px) {
+      right: 5px;
+    }
+
+    @media (max-width: 620px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1175px) {
+    width: 84%;
+  }
+
+  @media (max-width: 1030px) {
+    width: 100%;
+  }
+
+  @media (max-width: 960px) {
+    width: 95%;
+  }
+
+  @media (max-width: 885px) {
+    width: 113%;
+  }
+
+  @media (max-width: 805px) {
+    grid-template-columns: repeat(6, 13vw);
+  }
+
+  @media (max-width: 620px) {
+    width: 100%;
+    grid-template-columns: repeat(6, 14vw);
+  }
+}
