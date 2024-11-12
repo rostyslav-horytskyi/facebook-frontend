@@ -4,6 +4,7 @@ import { RightSidebar } from './components/RightSidebar/RightSidebar';
 import { block } from '../../helpers/bem.helpers';
 import './Home.scss';
 import Stories from './components/Stories/Stories';
+import CreatePost from './components/CreatePost/CreatePost';
 
 const b = block('Home');
 
@@ -14,6 +15,7 @@ export const Home = () => (
     <LeftSidebar user={{}} />
     <div className={b('middle')}>
       <Stories />
+      <CreatePost user={{}} />
     </div>
     <RightSidebar user={{}} />
   </div>
