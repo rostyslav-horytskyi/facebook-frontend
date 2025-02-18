@@ -1,17 +1,17 @@
 import { Formik, Form } from 'formik';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import LoginInput from '../LoginInput/LoginInput';
 import { useLogin } from '../../Login.context';
 import { useLoginUser } from '../../../../hooks/useLoginUser';
 import { loginValidation } from './LoginForm.validations';
 import { block } from '../../../../helpers/bem.helpers';
-import { login } from '../../../../store/slices/userSlice';
 import './LoginForm.scss';
 import { FormButton } from '../shared/FormButton';
 import { LoadingSpinner } from '../shared/LoadingSpinner';
 import { ErrorDisplay } from '../shared/ErrorDisplay';
+import { useAuth } from '../../../../context/AuthContext';
+import { LoginInfo } from '../../../../types';
 
 const b = block('LoginForm');
 
@@ -21,15 +21,15 @@ const loginInfos = {
 };
 export default function LoginForm() {
   const [, setRegisterFormVisible] = useLogin();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { login } = useAuth();
   const {
     trigger: loginUser,
     isMutating,
     error,
   } = useLoginUser({
     onSuccess: (data) => {
-      dispatch(login(data));
+      login((data as LoginInfo).token);
       Cookies.set('user', JSON.stringify(data));
       navigate('/');
     },
@@ -85,7 +85,7 @@ export default function LoginForm() {
           <LoadingSpinner loading={isMutating} />
           <ErrorDisplay error={error} className={b('error')} />
           <div className={b('splitter')} />
-          <FormButton 
+          <FormButton
             className={`${b('open-signup')} blue_btn`}
             onClick={() => setRegisterFormVisible(true)}
           >

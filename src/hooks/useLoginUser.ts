@@ -1,13 +1,13 @@
 import useSWRMutation, { SWRMutationConfiguration } from 'swr/mutation';
 import axios from 'axios';
-import { User, UserError } from '../types';
+import { LoginInfo, UserError } from '../types';
 
 type LoginParams = {
   email: string;
   password: string;
 };
 
-type LoginData = User | UserError;
+type LoginData = LoginInfo | UserError;
 
 type KeyGetter = () => { api: string };
 type MutationKey = ReturnType<KeyGetter>;

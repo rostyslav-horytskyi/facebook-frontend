@@ -1,5 +1,3 @@
-import { RuleSet } from 'styled-components';
-
 export type User = {
   first_name: string;
   last_name: string;
@@ -10,14 +8,18 @@ export type User = {
   bDay: number;
   gender: string;
   message: string;
+  picture: string;
+};
+
+export type LoginInfo = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  message: string;
+  picture: string;
+  token: string;
+  username: string;
+  verified: boolean;
 };
 
 export type UserError = { message: string };
-
-export type HoverType = 'hover' | 'middleHover' | 'deepHover';
-
-export type HoverStyles = {
-  hover: RuleSet<object>;
-  middleHover: RuleSet<object>;
-  deepHover: RuleSet<object>;
-};

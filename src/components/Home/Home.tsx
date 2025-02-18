@@ -5,18 +5,23 @@ import { block } from '../../helpers/bem.helpers';
 import './Home.scss';
 import Stories from './components/Stories/Stories';
 import CreatePost from './components/CreatePost/CreatePost';
+import { useGetCurrentUser } from '../../hooks/useGetCurrentUser';
+import { User } from '../../types';
 
 const b = block('Home');
 
-export const Home = () => (
-  <div className={b()}>
-    <Header />
-    {/* TODO: Use add user */}
-    <LeftSidebar user={{}} />
-    <div className={b('middle')}>
-      <Stories />
-      <CreatePost user={{}} />
+export const Home = () => {
+  const { data } = useGetCurrentUser();
+
+  return (
+    <div className={b()}>
+      <Header />
+      <LeftSidebar user={data as User} />
+      <div className={b('middle')}>
+        <Stories />
+        <CreatePost user={data} />
+      </div>
+      <RightSidebar user={data} />
     </div>
-    <RightSidebar user={{}} />
-  </div>
-);
+  );
+};

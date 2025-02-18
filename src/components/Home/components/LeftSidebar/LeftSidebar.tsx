@@ -13,15 +13,12 @@ import {
 } from '../../../../helpers/bem.helpers';
 import { Copyright } from './components/Copyright/Copyright';
 import { shortcuts } from './LeftSidebar.utils';
+import { User } from '../../../../types';
 
 const b = block('LeftSidebar');
 
 type LeftSidebarProps = {
-  user: {
-    picture: string;
-    first_name: string;
-    last_name: string;
-  };
+  user: User;
 };
 
 export const LeftSidebar = memo(({ user }: LeftSidebarProps) => {

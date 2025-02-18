@@ -6,6 +6,7 @@ import './styles/icons/icons.scss';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import store from './store';
+import { AuthProvider } from './context/AuthContext';
 
 const container = document.getElementById('root');
 
@@ -14,11 +15,13 @@ if (container !== null) {
 
   root.render(
     <StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
+      <AuthProvider>
+        <Provider store={store}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      </AuthProvider>
     </StrictMode>
   );
 }
