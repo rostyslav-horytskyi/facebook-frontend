@@ -8,11 +8,14 @@ import { MenuMain } from './components/MenuMain/MenuMain';
 import { MENU_VIEWS } from './UserMenu.constants';
 import { block, splitterBlock } from '../../../../helpers/bem.helpers';
 import './UserMenu.scss';
+import { useAuth } from '../../../../context/AuthContext';
+import { User } from '../../../../types';
 
 const b = block('UserMenu');
 
-export default function UserMenu({ user }) {
+export default function UserMenu({ user }: { user: User }) {
   const [visible, setVisible] = useState(MENU_VIEWS.MAIN);
+  const { logout } = useAuth();
 
   const userProfileLink = useMemo(
     () => `${user?.first_name} ${user?.last_name}`,
@@ -60,7 +63,7 @@ export default function UserMenu({ user }) {
           <UserMenuItem
             iconClass="logout_filled_icon"
             text="Logout"
-            onClick={() => console.log('Logout')}
+            onClick={() => logout()}
           />
         </>
       )}

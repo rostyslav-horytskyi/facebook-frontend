@@ -1,6 +1,4 @@
 import { Form, Formik } from 'formik';
-import { useDispatch } from 'react-redux';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { GenderSelect } from '../GenderSelect/GenderSelect';
@@ -12,17 +10,17 @@ import { MONTHS, YEARS } from './RegisterForm.constants';
 import { User } from '../../../../types';
 import { block } from '../../../../helpers/bem.helpers';
 import { useLogin } from '../../Login.context';
-import { login } from '../../../../store/slices/userSlice';
 import './RegisterForm.scss';
 import { FormButton } from '../shared/FormButton';
 import { LoadingSpinner } from '../shared/LoadingSpinner';
 import { ErrorDisplay } from '../shared/ErrorDisplay';
+import { useAuth } from '../../../../context/AuthContext';
 
 const b = block('RegisterForm');
 
 export default function RegisterForm() {
   const [isRegisterFormVisible, setRegisterFormVisible] = useLogin();
-  const dispatch = useDispatch();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const userInfos = {
     first_name: '',
@@ -42,12 +40,11 @@ export default function RegisterForm() {
     error,
   } = useRegisterUser({
     onSuccess: (data) => {
-      const { message, ...rest } = data;
+      const { message } = data;
 
       setSuccess(message);
       setTimeout(() => {
-        dispatch(login(rest));
-        Cookies.set('user', JSON.stringify(rest));
+        login(data.token);
         navigate('/');
       }, 2000);
     },
@@ -157,7 +154,10 @@ export default function RegisterForm() {
                   notifications from us and can opt out at any time.
                 </div>
                 <div className={b('btn-wrapper')}>
-                  <FormButton type="submit" className={`${b('signup')} blue_btn`}>
+                  <FormButton
+                    type="submit"
+                    className={`${b('signup')} blue_btn`}
+                  >
                     Sign Up
                   </FormButton>
                 </div>

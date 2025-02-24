@@ -9,6 +9,7 @@ export type User = {
   gender: string;
   message: string;
   picture: string;
+  verified: boolean;
 };
 
 export type LoginInfo = {
@@ -21,5 +22,3 @@ export type LoginInfo = {
   username: string;
   verified: boolean;
 };
-
-export type UserError = { message: string };

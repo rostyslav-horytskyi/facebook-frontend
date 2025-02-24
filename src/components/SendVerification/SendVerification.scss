@@ -1,0 +1,47 @@
+.SendVerification {
+  background: $bg-primary;
+  box-shadow: 0 1px 2px $shadow-1;
+  padding: 20px;
+  font-size: 14px;
+  color: $color-primary;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+
+  &__resend-link {
+    color: $blue-color;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &--error {
+    color: $error-color;
+  }
+
+  &--success {
+    color: $green-color;
+  }
+
+  @media (max-width: 1175px) {
+    width: 84%;
+  }
+
+  @media (max-width: 1030px) {
+    width: 100%;
+  }
+
+  @media (max-width: 960px) {
+    width: 93%;
+  }
+
+  @media (max-width: 885px) {
+    width: 110%;
+  }
+
+  @media (max-width: 620px) {
+    width: 100%;
+  }
+}
