@@ -1,0 +1,6 @@
+export const STEPS = {
+  SEARCH_ACCOUNT: 0,
+  SEND_EMAIL: 1,
+  VERIFY_CODE: 2,
+  CHANGE_PASSWORD: 3,
+};

@@ -79,7 +79,7 @@ export default function LoginForm() {
               </Form>
             )}
           </Formik>
-          <Link to="/forgot" className={b('forgot-password')}>
+          <Link to="/reset" className={b('forgot-password')}>
             Forgotten password?
           </Link>
           <LoadingSpinner loading={isMutating} />

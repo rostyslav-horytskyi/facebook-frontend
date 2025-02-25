@@ -3,6 +3,7 @@ import { Login } from './components/Login/Login';
 import { Home } from './components/Home/Home';
 import Activate from './components/Activate/Activate';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import ResetPassword from './components/ResetPassword/ResetPassword';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/reset" element={<ResetPassword />} />
       </Routes>
     </div>
   );
