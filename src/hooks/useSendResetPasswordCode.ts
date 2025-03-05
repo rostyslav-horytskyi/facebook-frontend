@@ -11,7 +11,7 @@ const sendEmailRequest = async (
 
 export function useSendResetPasswordCode() {
   const { trigger, isMutating, error } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/sendResetPasswordCode`,
+    `${import.meta.env.VITE_BACKEND_URL}/send-reset-password-code`,
     sendEmailRequest
   );
 

@@ -30,13 +30,13 @@ export const useActivateAccount = (token?: string) => {
     if (data) {
       refreshUserInfo();
 
-      // setTimeout(() => navigate('/'), 3000);
+      setTimeout(() => navigate('/'), 3000);
     }
   }, [data, user, navigate]);
 
   useEffect(() => {
     if (error) {
-      // setTimeout(() => navigate('/'), 3000);
+      setTimeout(() => navigate('/'), 3000);
     }
   }, [error, navigate]);
 

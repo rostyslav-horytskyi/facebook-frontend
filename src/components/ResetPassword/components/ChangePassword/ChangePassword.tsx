@@ -31,7 +31,7 @@ export default function ChangePassword({
       )
       .min(6, 'Password must be at least 6 characters.')
       .max(36, "Password can't be more than 36 characters."),
-    conf_password: Yup.string()
+    confPassword: Yup.string()
       .required('Confirm your password.')
       .oneOf([Yup.ref('password')], 'Passwords must match.'),
   });
@@ -39,7 +39,7 @@ export default function ChangePassword({
   const handleChangePassword = async () => {
     try {
       await trigger({ email, password });
-      navigate('/');
+      navigate('/login');
     } catch {
       // Error is handled by SWR
     }
@@ -66,7 +66,7 @@ export default function ChangePassword({
             />
             <LoginInput
               type="password"
-              name="conf_password"
+              name="confPassword"
               onChange={(e) => setConfPassword(e.target.value)}
               placeholder="Confirm new password"
               bottom

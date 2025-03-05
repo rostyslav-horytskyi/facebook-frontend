@@ -1,9 +1,10 @@
 import useSWR from 'swr';
 import axios from 'axios';
-import { User, UserError } from '../types';
+import { User } from '../types';
 
-const fetchCurrentUser = async (): Promise<User | UserError> => {
+const fetchCurrentUser = async (): Promise<User> => {
   const token = localStorage.getItem('token');
+
   if (!token) {
     throw new Error('Unauthorized');
   }

@@ -8,7 +8,7 @@ const fetcher = async (url: string, { arg: email }: { arg: string }) => {
 
 export function useFindUser() {
   const { trigger, data, isMutating, error } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/findUser`,
+    `${import.meta.env.VITE_BACKEND_URL}/find-user`,
     fetcher
   );
 

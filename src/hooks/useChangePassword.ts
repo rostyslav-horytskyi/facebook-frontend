@@ -11,7 +11,7 @@ const fetcher = async (
 
 export function useChangePassword() {
   const { trigger, isMutating, error } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/changePassword`,
+    `${import.meta.env.VITE_BACKEND_URL}/change-password`,
     fetcher
   );
 

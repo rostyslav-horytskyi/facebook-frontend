@@ -11,7 +11,7 @@ const fetcher = async (
 
 export function useVerifyCode() {
   const { trigger, isMutating, error } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/validateResetCode`,
+    `${import.meta.env.VITE_BACKEND_URL}/validate-reset-code`,
     fetcher
   );
 

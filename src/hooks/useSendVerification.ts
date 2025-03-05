@@ -19,7 +19,7 @@ const sendVerificationFetcher = async (
 
 export function useSendVerification() {
   const { trigger, data, error, isMutating } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/sendVerification`,
+    `${import.meta.env.VITE_BACKEND_URL}/send-verification`,
     sendVerificationFetcher
   );
 
