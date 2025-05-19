@@ -1,0 +1,60 @@
+// BEM Pattern Guide and Helpers
+// ---------------------------
+// This file provides common mixins for consistent BEM patterns across the application.
+// The project follows BEM (Block, Element, Modifier) methodology:
+// - Block: Main component (.Block)
+// - Element: Component part (.Block__element)
+// - Modifier: Component/element variant (.Block--modifier, .Block__element--modifier)
+
+// Helper for element images to ensure consistent styling
+@mixin bem-element-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Helper for circle images within BEM elements
+@mixin bem-circle-image($size: 36px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+// Helper for hover states according to BEM methodology
+@mixin bem-hover {
+  &:hover {
+    background: $bg-third;
+  }
+}
+
+// Helper for active state modifier
+@mixin bem-active($bg-color: $bg-third, $border-color: $blue-color) {
+  background: $bg-color;
+  border-bottom: 3px solid $border-color;
+}
+
+// Helper for error state modifier
+@mixin bem-error($color: $error-color) {
+  color: $color;
+  border-color: $color;
+}
+
+// Helper for BEM status indicators (notifications, badges, etc.)
+@mixin bem-status-indicator($background: #e41e3f, $color: #fff) {
+  display: inline-block;
+  background: $background;
+  color: $color;
+  border-radius: 50px;
+  font-size: 12px;
+  padding: 1px 6px;
+}
+
+// Helper for icon styling within BEM elements
+@mixin bem-icon($size: 20px) {
+  width: $size;
+  height: $size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
