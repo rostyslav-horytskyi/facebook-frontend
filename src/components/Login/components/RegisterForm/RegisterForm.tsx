@@ -31,6 +31,8 @@ export default function RegisterForm() {
     bMonth: new Date().getMonth() + 1,
     bDay: new Date().getDate(),
     gender: '',
+    picture: '',
+    verified: false
   };
   const [success, setSuccess] = useState('');
 

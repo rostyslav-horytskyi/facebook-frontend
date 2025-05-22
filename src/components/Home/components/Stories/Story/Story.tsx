@@ -3,7 +3,17 @@ import './Story.scss';
 
 const b = block('Story');
 
-export default function Story({ story }) {
+export interface StoryType {
+  image: string;
+  profile_picture: string;
+  profile_name: string;
+}
+
+interface StoryProps {
+  story: StoryType;
+}
+
+export default function Story({ story }: StoryProps) {
   return (
     <div className={b()}>
       <img src={story.image} alt="" className={b('img')} />

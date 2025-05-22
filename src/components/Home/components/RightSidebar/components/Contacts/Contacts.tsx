@@ -2,6 +2,7 @@ import React from 'react';
 import { Dots, NewRoom, Search } from '../../../../../../svg';
 import Contact from '../Contact/Contact';
 import { block } from '../../../../../../helpers/bem.helpers';
+import { User } from '../../../../../../types';
 import './Contacts.scss';
 
 const b = block('Contacts');
@@ -18,7 +19,11 @@ const IconCircle = ({
   </div>
 );
 
-export const Contacts = ({ user }) => {
+interface ContactsProps {
+  user: User;
+}
+
+export const Contacts = ({ user }: ContactsProps) => {
   const color = '#65676b';
   return (
     <div className={b()}>

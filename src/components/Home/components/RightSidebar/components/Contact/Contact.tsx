@@ -1,9 +1,14 @@
 import { block } from '../../../../../../helpers/bem.helpers';
+import { User } from '../../../../../../types';
 import './Contact.scss';
 
 const b = block('Contact');
 
-export default function Contact({ user }) {
+interface ContactProps {
+  user: User;
+}
+
+export default function Contact({ user }: ContactProps) {
   return (
     <div className={`${b()} deep_hover`}>
       <div className={b('image')}>

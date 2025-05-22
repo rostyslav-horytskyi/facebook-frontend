@@ -22,3 +22,12 @@ export type LoginInfo = {
   username: string;
   verified: boolean;
 };
+
+/**
+ * Error response from the API
+ */
+export type UserError = {
+  message: string;
+  status: number;
+  error?: string;
+};

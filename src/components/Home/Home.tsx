@@ -12,18 +12,28 @@ import SendVerification from '../SendVerification/SendVerification';
 const b = block('Home');
 
 export const Home = () => {
-  const { data } = useGetCurrentUser();
+  const { data: user } = useGetCurrentUser();
+  
+  // Show loading or error state if user data is not available
+  if (!user) {
+    return (
+      <div className={b()}>
+        <Header />
+        <div className={b('loading')}>Loading user data...</div>
+      </div>
+    );
+  }
 
   return (
     <div className={b()}>
       <Header />
-      <LeftSidebar user={data as User} />
+      <LeftSidebar user={user} />
       <div className={b('middle')}>
         <Stories />
-        {!data?.verified && <SendVerification />}
-        <CreatePost user={data} />
+        {!user.verified && <SendVerification />}
+        <CreatePost user={user} />
       </div>
-      <RightSidebar user={data} />
+      <RightSidebar user={user} />
     </div>
   );
 };

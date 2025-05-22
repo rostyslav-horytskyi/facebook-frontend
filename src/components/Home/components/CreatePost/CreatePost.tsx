@@ -1,10 +1,15 @@
 import { Feeling, LiveVideo, Photo } from '../../../../svg';
 import './CreatePost.scss';
 import { block } from '../../../../helpers/bem.helpers';
+import { User } from '../../../../types';
 
 const b = block('CreatePost');
 
-export default function CreatePost({ user }) {
+interface CreatePostProps {
+  user: User;
+}
+
+export default function CreatePost({ user }: CreatePostProps) {
   return (
     <div className={b()}>
       <div className={b('header')}>

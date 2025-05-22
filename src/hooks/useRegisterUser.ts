@@ -21,6 +21,8 @@ export type RegisterParams = {
   bMonth: number;
   bDay: number;
   gender: string;
+  picture: string;
+  verified: boolean;
 };
 
 /**
@@ -72,7 +74,9 @@ type RegisterOptions = SWRMutationConfiguration<LoginInfo, Error, MutationKey, R
  *   bYear: 1990,
  *   bMonth: 1,
  *   bDay: 1,
- *   gender: 'male'
+ *   gender: 'male',
+ *   picture: '',
+ *   verified: false
  * });
  */
 export const useRegisterUser = (options?: RegisterOptions) =>
