@@ -1,8 +1,8 @@
+import { useMediaQuery } from 'react-responsive';
 import { ArrowRight } from '../../../../svg';
 import './Stories.scss';
 import { stories } from '../../../../data/home';
 import Story from './Story/Story';
-import { useMediaQuery } from 'react-responsive';
 import { block } from '../../../../helpers/bem.helpers';
 import { CreateStory } from './CreateStory/CreateStory';
 

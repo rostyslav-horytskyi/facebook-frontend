@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from 'react';
 
 /**
  * Generic form validation hook
- * 
+ *
  * Provides a reusable pattern for form validation with:
  * - Custom validation functions
  * - Field-level and form-level validation
@@ -52,16 +52,16 @@ export interface UseFormValidationReturn<T> {
 
 /**
  * Hook for form validation with custom validation functions
- * 
+ *
  * @param validators - Object mapping field names to validation functions
  * @returns Validation utilities and error state
- * 
+ *
  * @example
- * const { 
- *   errors, 
- *   validateField, 
+ * const {
+ *   errors,
+ *   validateField,
  *   validateForm,
- *   hasErrors 
+ *   hasErrors
  * } = useFormValidation({
  *   email: (value) => !value ? 'Email is required' : null,
  *   password: (value) => value.length < 8 ? 'Password too short' : null
@@ -72,15 +72,18 @@ export function useFormValidation<T extends Record<string, any>>(
 ): UseFormValidationReturn<T> {
   // State to store validation errors
   const [errors, setErrors] = useState<FormErrors<T>>({});
-  
+
   // Memoize validator fields for performance
-  const validatorFields = useMemo(() => Object.keys(validators) as Array<keyof T>, [validators]);
-  
+  const validatorFields = useMemo(
+    () => Object.keys(validators) as Array<keyof T>,
+    [validators]
+  );
+
   // Validate a single field
   const validateField = useCallback(
     (field: keyof T, value: T[keyof T]): boolean => {
       const validator = validators[field];
-      
+
       // If no validator exists for this field, consider it valid
       if (!validator) {
         // Clear any existing errors for this field
@@ -93,40 +96,41 @@ export function useFormValidation<T extends Record<string, any>>(
         }
         return true;
       }
-      
+
       // Run validation
       const error = validator(value);
-      
+
       // Update errors state (only if changed to prevent unnecessary rerenders)
       setErrors((prev) => {
         if (prev[field] === error) return prev;
-        
+
         if (error === null && prev[field]) {
           // Remove error if field is now valid
           const newErrors = { ...prev };
           delete newErrors[field];
           return newErrors;
-        } else if (error !== null) {
+        }
+        if (error !== null) {
           // Add/update error
           return { ...prev, [field]: error };
         }
-        
+
         return prev;
       });
-      
+
       return !error;
     },
     [validators, errors]
   );
-  
+
   // Validate all fields in the form
   const validateForm = useCallback(
     (values: T): boolean => {
       const newErrors: FormErrors<T> = {};
       let isValid = true;
-      
+
       // Check each field with a validator
-      for (const field of validatorFields) {
+      validatorFields.forEach((field) => {
         const validator = validators[field];
         if (validator) {
           const error = validator(values[field]);
@@ -135,50 +139,49 @@ export function useFormValidation<T extends Record<string, any>>(
             isValid = false;
           }
         }
-      }
-      
+      });
+
       // Only update errors state if there are changes
       setErrors(newErrors);
       return isValid;
     },
     [validators, validatorFields]
   );
-  
+
   // Set a field error manually
   const setFieldError = useCallback((field: keyof T, error: string | null) => {
     setErrors((prev) => {
       if (error === null) {
         // Remove error
         if (!prev[field]) return prev;
-        
+
         const newErrors = { ...prev };
         delete newErrors[field];
         return newErrors;
-      } else {
-        // Add/update error
-        if (prev[field] === error) return prev;
-        return { ...prev, [field]: error };
       }
+      // Add/update error
+      if (prev[field] === error) return prev;
+      return { ...prev, [field]: error };
     });
   }, []);
-  
+
   // Get error for a specific field
   const getFieldError = useCallback(
     (field: keyof T) => errors[field],
     [errors]
   );
-  
+
   // Clear all errors
   const clearErrors = useCallback(() => {
     setErrors({});
   }, []);
-  
+
   // Calculate if the form has any errors (memoized for performance)
-  const hasErrors = useMemo(() => 
-    Object.values(errors).some((error) => !!error), 
+  const hasErrors = useMemo(
+    () => Object.values(errors).some((error) => !!error),
     [errors]
   );
-  
+
   return {
     errors,
     validateField,

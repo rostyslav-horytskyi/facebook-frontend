@@ -23,33 +23,31 @@ export const FIND_USER_KEY = API_CONFIG.AUTH.VERIFY_CODE;
 const findUserMutation = async (
   key: string,
   { arg: email }: { arg: string }
-): Promise<UserInfo> => {
-  try {
-    return await post<UserInfo>(key, { email });
-  } catch (error) {
-    // Re-throw for SWR to handle
-    throw error;
-  }
-};
+): Promise<UserInfo> => post<UserInfo>(key, { email });
 
 /**
  * Options type for the hook
  */
-type FindUserOptions = SWRMutationConfiguration<UserInfo, Error, string, string>;
+type FindUserOptions = SWRMutationConfiguration<
+  UserInfo,
+  Error,
+  string,
+  string
+>;
 
 /**
  * Hook for finding a user by email (used in password reset flow)
- * 
+ *
  * @param options - SWR mutation options
  * @returns SWR mutation object with trigger function and state
- * 
+ *
  * @example
  * const { trigger: findUser, data, isMutating, error } = useFindUser({
  *   onSuccess: (userData) => {
  *     // Handle found user
  *   }
  * });
- * 
+ *
  * // Call findUser function with email
  * findUser('user@example.com');
  */

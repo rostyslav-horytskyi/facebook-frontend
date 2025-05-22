@@ -18,36 +18,30 @@ const fetchCurrentUser = async (): Promise<User> => {
     throw new Error('Unauthorized');
   }
 
-  try {
-    return await get<User>(API_CONFIG.USER.GET_PROFILE);
-  } catch (error) {
-    // Re-throw with more context if needed
-    throw error;
-  }
+  return get<User>(API_CONFIG.USER.GET_PROFILE);
 };
 
 /**
  * Hook for getting the currently authenticated user
- * 
+ *
  * @param config - SWR configuration options
  * @returns SWR response with user data, loading and error states
- * 
+ *
  * @example
  * const { data: user, error, isLoading, mutate } = useGetCurrentUser({
  *   revalidateOnFocus: false
  * });
- * 
+ *
  * if (isLoading) return <LoadingSpinner />;
  * if (error) return <ErrorMessage error={error} />;
- * 
+ *
  * return <ProfileComponent user={user} refreshData={mutate} />;
  */
-export const useGetCurrentUser = (config?: SWRConfiguration) => {
-  return useSWR(CURRENT_USER_KEY, fetchCurrentUser, {
+export const useGetCurrentUser = (config?: SWRConfiguration) =>
+  useSWR(CURRENT_USER_KEY, fetchCurrentUser, {
     // Default configuration (can be overridden)
     revalidateOnFocus: true,
     shouldRetryOnError: false,
     dedupingInterval: 60000, // 1 minute
-    ...config
+    ...config,
   });
-};

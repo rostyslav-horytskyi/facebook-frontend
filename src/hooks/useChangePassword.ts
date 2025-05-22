@@ -29,14 +29,7 @@ export const CHANGE_PASSWORD_KEY = API_CONFIG.AUTH.CHANGE_PASSWORD;
 const changePasswordMutation = async (
   key: string,
   { arg }: { arg: ChangePasswordParams }
-): Promise<ChangePasswordResponse> => {
-  try {
-    return await post<ChangePasswordResponse>(key, arg);
-  } catch (error) {
-    // Re-throw for SWR to handle
-    throw error;
-  }
-};
+): Promise<ChangePasswordResponse> => post<ChangePasswordResponse>(key, arg);
 
 /**
  * Options type for the hook
@@ -50,17 +43,17 @@ type ChangePasswordOptions = SWRMutationConfiguration<
 
 /**
  * Hook for changing user password (used in password reset flow)
- * 
+ *
  * @param options - SWR mutation options
  * @returns SWR mutation object with trigger function and state
- * 
+ *
  * @example
  * const { trigger: changePassword, isMutating, error } = useChangePassword({
  *   onSuccess: () => {
  *     // Handle successful password change
  *   }
  * });
- * 
+ *
  * // Call changePassword function
  * changePassword({ email: 'user@example.com', password: 'newPassword123' });
  */

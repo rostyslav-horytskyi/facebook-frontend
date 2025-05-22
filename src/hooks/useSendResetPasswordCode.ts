@@ -21,14 +21,8 @@ export const SEND_RESET_CODE_KEY = API_CONFIG.AUTH.RESET_PASSWORD;
 const sendResetCodeMutation = async (
   key: string,
   { arg: email }: { arg: string }
-): Promise<SendResetCodeResponse> => {
-  try {
-    return await post<SendResetCodeResponse>(key, { email });
-  } catch (error) {
-    // Re-throw for SWR to handle
-    throw error;
-  }
-};
+): Promise<SendResetCodeResponse> =>
+  post<SendResetCodeResponse>(key, { email });
 
 /**
  * Options type for the hook
@@ -42,10 +36,10 @@ type SendResetCodeOptions = SWRMutationConfiguration<
 
 /**
  * Hook for sending password reset code to user's email
- * 
+ *
  * @param options - SWR mutation options
  * @returns SWR mutation object with trigger function and state
- * 
+ *
  * @example
  * const { trigger: sendResetCode, isMutating, error } = useSendResetPasswordCode({
  *   onSuccess: (response) => {
@@ -53,7 +47,7 @@ type SendResetCodeOptions = SWRMutationConfiguration<
  *     console.log(response.message);
  *   }
  * });
- * 
+ *
  * // Call sendResetCode function with email
  * sendResetCode('user@example.com');
  */

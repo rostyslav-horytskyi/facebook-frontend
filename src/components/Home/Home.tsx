@@ -6,14 +6,13 @@ import './Home.scss';
 import Stories from './components/Stories/Stories';
 import CreatePost from './components/CreatePost/CreatePost';
 import { useGetCurrentUser } from '../../hooks/useGetCurrentUser';
-import { User } from '../../types';
 import SendVerification from '../SendVerification/SendVerification';
 
 const b = block('Home');
 
 export const Home = () => {
   const { data: user } = useGetCurrentUser();
-  
+
   // Show loading or error state if user data is not available
   if (!user) {
     return (

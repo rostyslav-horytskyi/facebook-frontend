@@ -36,14 +36,7 @@ export const getLoginKey: KeyGetter = () => ({
 const loginMutation = async (
   key: MutationKey,
   { arg }: { arg: LoginParams }
-): Promise<LoginData> => {
-  try {
-    return await post<LoginData>(key.endpoint, arg);
-  } catch (error) {
-    // Convert error to a format SWR can handle
-    throw error;
-  }
-};
+): Promise<LoginData> => post<LoginData>(key.endpoint, arg);
 
 /**
  * Options type for the hook
@@ -57,17 +50,17 @@ type LoginOptions = SWRMutationConfiguration<
 
 /**
  * Hook for user login functionality
- * 
+ *
  * @param options - SWR mutation options
  * @returns SWR mutation object with trigger function and state
- * 
+ *
  * @example
  * const { trigger: login, isMutating, error } = useLoginUser({
  *   onSuccess: (data) => {
  *     // Handle successful login
  *   }
  * });
- * 
+ *
  * // Call login function with credentials
  * login({ email: 'user@example.com', password: 'password123' });
  */

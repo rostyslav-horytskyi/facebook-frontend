@@ -16,28 +16,25 @@ export interface ActivationResponse {
 /**
  * Cache key for account activation
  */
-export const getActivationKey = (token: string) => 
+export const getActivationKey = (token: string) =>
   [API_CONFIG.AUTH.ACTIVATE, token] as const;
 
 /**
  * Sends account activation request
  */
-const fetchActivate = async ([url, token]: readonly [string, string]): Promise<ActivationResponse> => {
-  try {
-    return await post<ActivationResponse>(url, { token });
-  } catch (error) {
-    throw error;
-  }
-};
+const fetchActivate = async ([url, token]: readonly [
+  string,
+  string,
+]): Promise<ActivationResponse> => post<ActivationResponse>(url, { token });
 
 /**
  * Hook for activating a user account
- * 
+ *
  * @param token - Activation token from URL
  * @param redirectDelay - Delay in ms before redirecting (default: 3000)
  * @param config - SWR configuration options
  * @returns Object containing success message, error, and loading state
- * 
+ *
  * @example
  * const { success, error, loading, cancelRedirect } = useActivateAccount(
  *   activationToken,
@@ -45,13 +42,13 @@ const fetchActivate = async ([url, token]: readonly [string, string]): Promise<A
  * );
  */
 export const useActivateAccount = (
-  token?: string, 
-  redirectDelay: number = 3000,
-  config?: SWRConfiguration
+  token?: string,
+  config?: SWRConfiguration,
+  redirectDelay = 3000
 ) => {
   const navigate = useNavigate();
   const { mutate: refreshUserInfo } = useGetCurrentUser();
-  
+
   // Use null as key when token is not available to prevent request
   const { data, error, isLoading, isValidating } = useSWR(
     token ? getActivationKey(token) : null,
@@ -59,7 +56,7 @@ export const useActivateAccount = (
     {
       revalidateOnFocus: false,
       shouldRetryOnError: false,
-      ...config
+      ...config,
     }
   );
 
@@ -77,9 +74,10 @@ export const useActivateAccount = (
 
       // Redirect to home page after delay
       const timeoutId = setTimeout(() => navigate('/'), redirectDelay);
-      
+
       return () => clearTimeout(timeoutId);
     }
+    return undefined;
   }, [data, refreshUserInfo, navigate, redirectDelay]);
 
   // Handle activation error
@@ -87,15 +85,16 @@ export const useActivateAccount = (
     if (error) {
       // Redirect to home page after delay
       const timeoutId = setTimeout(() => navigate('/'), redirectDelay);
-      
+
       return () => clearTimeout(timeoutId);
     }
+    return undefined;
   }, [error, navigate, redirectDelay]);
 
   return {
     success: data?.message,
     error: error?.message || (error as any)?.response?.data?.message,
     loading: isLoading || isValidating,
-    cancelRedirect
+    cancelRedirect,
   };
 };

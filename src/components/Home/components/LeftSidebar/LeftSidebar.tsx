@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, memo } from 'react';
 import { SidebarItem } from '../SidebarItem/SidebarItem';
 import './LeftSidebar.scss';
-// eslint-disable-next-line camelcase
-import { left_sidebar } from '../../../../data/home';
+import { leftSidebar } from '../../../../data/home';
 import { ArrowDown1 } from '../../../../svg';
 import { Shortcut } from '../Shortcut/Shortcut';
 import {
@@ -47,15 +46,22 @@ export const LeftSidebar = memo(({ user }: LeftSidebarProps) => {
         </span>
       </Link>
 
-      {/* eslint-disable-next-line camelcase */}
-      {left_sidebar.slice(0, 8).map((link) => (
-        <SidebarItem
-          key={link.img}
-          img={link.img}
-          text={link.text}
-          notification={link.notification}
-        />
-      ))}
+      {leftSidebar
+        .slice(0, 8)
+        .map(
+          (link: {
+            img: string;
+            text: string;
+            notification?: string | number;
+          }) => (
+            <SidebarItem
+              key={link.img}
+              img={link.img}
+              text={link.text}
+              notification={link.notification}
+            />
+          )
+        )}
 
       {!visible && (
         <div
@@ -75,15 +81,22 @@ export const LeftSidebar = memo(({ user }: LeftSidebarProps) => {
 
       {visible && (
         <div className={b('more')}>
-          {/* eslint-disable-next-line camelcase */}
-          {left_sidebar.slice(8).map((link) => (
-            <SidebarItem
-              key={link.img}
-              img={link.img}
-              text={link.text}
-              notification={link.notification}
-            />
-          ))}
+          {leftSidebar
+            .slice(8)
+            .map(
+              (link: {
+                img: string;
+                text: string;
+                notification?: string | number;
+              }) => (
+                <SidebarItem
+                  key={link.img}
+                  img={link.img}
+                  text={link.text}
+                  notification={link.notification}
+                />
+              )
+            )}
           <div
             className={`${b('show-less')} hover1`}
             onClick={() => setVisible(false)}

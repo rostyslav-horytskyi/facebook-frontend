@@ -1,8 +1,10 @@
-export const isFieldInvalid = (touched: boolean | undefined, error: string | undefined) => 
-  Boolean(touched && error);
+export const isFieldInvalid = (
+  touched: boolean | undefined,
+  error: string | undefined
+) => Boolean(touched && error);
 
 export const getErrorMessagePosition = (
-  fieldName: string, 
+  fieldName: string,
   isDesktopView: boolean
 ): 'left' | 'right' | 'bottom' => {
   if (!isDesktopView) return 'bottom';

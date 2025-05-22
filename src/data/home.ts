@@ -1,4 +1,4 @@
-export const left_sidebar = [
+export const leftSidebar = [
   {
     text: 'Find friends',
     img: 'friends',

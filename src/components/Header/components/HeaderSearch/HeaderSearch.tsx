@@ -26,8 +26,6 @@ export const HeaderSearch = () => {
     setSearchMenuVisible(true);
   };
 
-  console.log({ isTabletView, isSearchMenuVisible });
-
   return (
     <OutsideClickHandler onOutsideClick={handleCloseSearchMenu}>
       <div

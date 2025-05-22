@@ -1,6 +1,5 @@
 import useSWRMutation, { SWRMutationConfiguration } from 'swr/mutation';
 import { post } from '../utils/apiClient';
-import { API_CONFIG } from '../config/api.config';
 
 /**
  * Parameters for verifying reset code
@@ -30,14 +29,7 @@ export const VERIFY_CODE_ENDPOINT = '/validate-reset-code';
 const verifyCodeMutation = async (
   key: string,
   { arg }: { arg: VerifyCodeParams }
-): Promise<VerifyCodeResponse> => {
-  try {
-    return await post<VerifyCodeResponse>(key, arg);
-  } catch (error) {
-    // Re-throw for SWR to handle
-    throw error;
-  }
-};
+): Promise<VerifyCodeResponse> => post<VerifyCodeResponse>(key, arg);
 
 /**
  * Options type for the hook
@@ -51,10 +43,10 @@ type VerifyCodeOptions = SWRMutationConfiguration<
 
 /**
  * Hook for verifying a password reset code
- * 
+ *
  * @param options - SWR mutation options
  * @returns SWR mutation object with trigger function and state
- * 
+ *
  * @example
  * const { trigger: verifyCode, isMutating, error } = useVerifyCode({
  *   onSuccess: (response) => {
@@ -62,7 +54,7 @@ type VerifyCodeOptions = SWRMutationConfiguration<
  *     console.log(response.message);
  *   }
  * });
- * 
+ *
  * // Call verifyCode function
  * verifyCode({ email: 'user@example.com', code: '123456' });
  */

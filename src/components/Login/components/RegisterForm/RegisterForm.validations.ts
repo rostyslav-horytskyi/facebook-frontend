@@ -29,7 +29,7 @@ export const registerValidation = Yup.object({
     .test(
       'age',
       'You must be older than 14 and younger than 70 years',
-      function () {
+      function checkAge() {
         const { bDay, bMonth, bYear } = this.parent;
         const birthDate = new Date(bYear, bMonth - 1, bDay);
         const today = new Date();

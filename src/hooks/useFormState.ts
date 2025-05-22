@@ -1,9 +1,13 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
-import { useFormValidation, FieldValidators, FormErrors } from './useFormValidation';
+import {
+  useFormValidation,
+  FieldValidators,
+  FormErrors,
+} from './useFormValidation';
 
 /**
  * Custom hook for managing form state
- * 
+ *
  * Provides a complete form state management solution with:
  * - Values and change handling
  * - Field-level validation
@@ -54,10 +58,10 @@ export interface UseFormReturn<T> {
 
 /**
  * Hook for complete form state management
- * 
+ *
  * @param options - Form configuration options
  * @returns Form state and handlers
- * 
+ *
  * @example
  * const {
  *   values,
@@ -87,43 +91,54 @@ export function useFormState<T extends Record<string, any>>({
 }: UseFormProps<T>): UseFormReturn<T> {
   // State management
   const [values, setValues] = useState<T>(initialValues);
-  const [touched, setTouchedFields] = useState<Record<keyof T, boolean>>({} as Record<keyof T, boolean>);
+  const [touched, setTouchedFields] = useState<Record<keyof T, boolean>>(
+    {} as Record<keyof T, boolean>
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const initialValuesRef = useRef(initialValues);
-  
+
   // Get validation functions
-  const { 
-    errors, 
-    validateField, 
-    validateForm, 
+  const {
+    errors,
+    validateField,
+    validateForm,
     setFieldError,
     clearErrors,
-    hasErrors 
+    hasErrors,
   } = useFormValidation<T>(validators);
-  
+
+  // Define resetForm function before use
+  const resetForm = useCallback(() => {
+    setValues(initialValues);
+    setTouchedFields({} as Record<keyof T, boolean>);
+    clearErrors();
+  }, [initialValues, clearErrors]);
+
   // Reset form when initialValues change (if enabled)
   useEffect(() => {
-    if (resetOnInitialValuesChange && 
-        JSON.stringify(initialValuesRef.current) !== JSON.stringify(initialValues)) {
+    if (
+      resetOnInitialValuesChange &&
+      JSON.stringify(initialValuesRef.current) !== JSON.stringify(initialValues)
+    ) {
       resetForm();
       initialValuesRef.current = initialValues;
     }
-  }, [initialValues, resetOnInitialValuesChange]);
-  
+  }, [initialValues, resetOnInitialValuesChange, resetForm]);
+
   // Check if form is dirty (values differ from initial)
   const isDirty = JSON.stringify(values) !== JSON.stringify(initialValues);
-  
+
   // Handle input change
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value, type, checked } = event.target;
       const fieldValue = type === 'checkbox' ? checked : value;
-      
+
       setValues((prev) => ({
         ...prev,
         [name]: fieldValue,
       }));
-      
+
       // Validate field if already touched
       if (touched[name as keyof T]) {
         validateField(name as keyof T, fieldValue as T[keyof T]);
@@ -131,24 +146,24 @@ export function useFormState<T extends Record<string, any>>({
     },
     [touched, validateField]
   );
-  
+
   // Handle input blur (focus lost)
   const handleBlur = useCallback(
     (event: React.FocusEvent<HTMLInputElement>) => {
       const { name, value } = event.target;
-      
+
       // Mark field as touched
       setTouchedFields((prev) => ({
         ...prev,
         [name]: true,
       }));
-      
+
       // Validate field on blur
       validateField(name as keyof T, value as T[keyof T]);
     },
     [validateField]
   );
-  
+
   // Set a single value programmatically
   const setValue = useCallback(
     (field: keyof T, value: any) => {
@@ -156,7 +171,7 @@ export function useFormState<T extends Record<string, any>>({
         ...prev,
         [field]: value,
       }));
-      
+
       // Validate if field is touched
       if (touched[field]) {
         validateField(field, value);
@@ -164,27 +179,27 @@ export function useFormState<T extends Record<string, any>>({
     },
     [touched, validateField]
   );
-  
+
   // Set multiple values at once
   const setMultipleValues = useCallback(
     (newValues: Partial<T>) => {
       setValues((prev) => {
         const updatedValues = { ...prev, ...newValues };
-        
+
         // Validate any touched fields that were updated
-        Object.keys(newValues).forEach(key => {
+        Object.keys(newValues).forEach((key) => {
           const field = key as keyof T;
           if (touched[field]) {
             validateField(field, updatedValues[field]);
           }
         });
-        
+
         return updatedValues;
       });
     },
     [touched, validateField]
   );
-  
+
   // Set touched state for a field
   const setFieldTouched = useCallback(
     (field: keyof T, isTouched: boolean) => {
@@ -192,7 +207,7 @@ export function useFormState<T extends Record<string, any>>({
         ...prev,
         [field]: isTouched,
       }));
-      
+
       // Validate field if being marked as touched
       if (isTouched) {
         validateField(field, values[field]);
@@ -200,12 +215,12 @@ export function useFormState<T extends Record<string, any>>({
     },
     [validateField, values]
   );
-  
+
   // Form submission handler
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      
+
       // Mark all fields as touched
       const allTouched = Object.keys(values).reduce(
         (acc, key) => ({
@@ -214,16 +229,16 @@ export function useFormState<T extends Record<string, any>>({
         }),
         {} as Record<keyof T, boolean>
       );
-      
+
       setTouchedFields(allTouched);
-      
+
       // Validate entire form
       const isValid = validateForm(values);
-      
+
       if (!isValid) {
         return;
       }
-      
+
       // Handle submission
       try {
         setIsSubmitting(true);
@@ -243,14 +258,9 @@ export function useFormState<T extends Record<string, any>>({
     },
     [values, validateForm, onSubmit, setFieldError]
   );
-  
-  // Reset form to initial values
-  const resetForm = useCallback(() => {
-    setValues(initialValues);
-    setTouchedFields({} as Record<keyof T, boolean>);
-    clearErrors();
-  }, [initialValues, clearErrors]);
-  
+
+  // resetForm is defined earlier in the component
+
   return {
     values,
     errors,

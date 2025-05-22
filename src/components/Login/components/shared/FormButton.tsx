@@ -7,11 +7,11 @@ type FormButtonProps = {
   onClick?: () => void;
 };
 
-export const FormButton = ({ 
-  children, 
+export const FormButton = ({
+  children,
   type = 'button',
   className = 'blue_btn',
-  onClick 
+  onClick,
 }: FormButtonProps) => (
   <button type={type} className={className} onClick={onClick}>
     {children}

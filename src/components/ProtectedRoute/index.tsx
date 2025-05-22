@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useGetCurrentUser } from '../../hooks/useGetCurrentUser';
 
@@ -6,7 +6,9 @@ interface ProtectedRouteProps {
   children: ReactElement;
 }
 
-export function ProtectedRoute({ children }: ProtectedRouteProps): ReactElement | null {
+export function ProtectedRoute({
+  children,
+}: ProtectedRouteProps): ReactElement | null {
   const { isAuthenticated, logout } = useAuth();
   const { error } = useGetCurrentUser();
 

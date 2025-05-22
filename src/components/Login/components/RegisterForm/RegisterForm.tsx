@@ -32,7 +32,7 @@ export default function RegisterForm() {
     bDay: new Date().getDate(),
     gender: '',
     picture: '',
-    verified: false
+    verified: false,
   };
   const [success, setSuccess] = useState('');
 

@@ -30,8 +30,6 @@ export default function ResetPassword() {
     setResetState((prev) => ({ ...prev, [field]: value }));
   };
 
-  console.log({ resetState });
-
   return (
     <div className={b()}>
       <div className={b('header')}>

@@ -1,4 +1,3 @@
-import { isString } from 'lodash';
 import { block } from '../../../../helpers/bem.helpers';
 import './SidebarItem.scss';
 
@@ -11,12 +10,12 @@ export function SidebarItem({
 }: {
   img: string;
   text: string;
-  notification?: string;
+  notification?: string | number;
 }) {
   return (
     <div className={`${b()} hover`}>
       <img src={`../../../../left/${img}.png`} alt={img} />
-      {isString(notification) ? (
+      {notification ? (
         <div className={b('column')}>
           <div className={b('text')}>{text}</div>
           <div className={b('notification')}>{notification}</div>

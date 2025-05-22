@@ -28,11 +28,19 @@ http.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
 
+    // Create a new config object instead of modifying the parameter
+    const updatedConfig = { ...config };
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      // Use axios headers properly
+      if (updatedConfig.headers) {
+        // Modify headers object
+        Object.assign(updatedConfig.headers, {
+          Authorization: `Bearer ${token}`,
+        });
+      }
     }
 
-    return config;
+    return updatedConfig;
   },
   (error) => Promise.reject(error)
 );
@@ -59,7 +67,7 @@ http.interceptors.response.use(
 
     // Handle server errors
     if (error.response?.status === 500) {
-      console.error('Server error:', error);
+      // Server error handling
     }
 
     return Promise.reject(error);
