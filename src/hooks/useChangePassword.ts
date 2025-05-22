@@ -1,19 +1,75 @@
-import useSWRMutation from 'swr/mutation';
-import axios from 'axios';
+import useSWRMutation, { SWRMutationConfiguration } from 'swr/mutation';
+import { post } from '../utils/apiClient';
+import { API_CONFIG } from '../config/api.config';
 
-const fetcher = async (
-  url: string,
-  { arg }: { arg: { email: string; password: string } }
-) => {
-  const { email, password } = arg;
-  await axios.post(url, { email, password });
+/**
+ * Parameters for password change
+ */
+export interface ChangePasswordParams {
+  email: string;
+  password: string;
+}
+
+/**
+ * Response from password change API
+ */
+export interface ChangePasswordResponse {
+  message: string;
+  success: boolean;
+}
+
+/**
+ * Cache key for change password mutation
+ */
+export const CHANGE_PASSWORD_KEY = API_CONFIG.AUTH.CHANGE_PASSWORD;
+
+/**
+ * Changes user password
+ */
+const changePasswordMutation = async (
+  key: string,
+  { arg }: { arg: ChangePasswordParams }
+): Promise<ChangePasswordResponse> => {
+  try {
+    return await post<ChangePasswordResponse>(key, arg);
+  } catch (error) {
+    // Re-throw for SWR to handle
+    throw error;
+  }
 };
 
-export function useChangePassword() {
-  const { trigger, isMutating, error } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/change-password`,
-    fetcher
+/**
+ * Options type for the hook
+ */
+type ChangePasswordOptions = SWRMutationConfiguration<
+  ChangePasswordResponse,
+  Error,
+  string,
+  ChangePasswordParams
+>;
+
+/**
+ * Hook for changing user password (used in password reset flow)
+ * 
+ * @param options - SWR mutation options
+ * @returns SWR mutation object with trigger function and state
+ * 
+ * @example
+ * const { trigger: changePassword, isMutating, error } = useChangePassword({
+ *   onSuccess: () => {
+ *     // Handle successful password change
+ *   }
+ * });
+ * 
+ * // Call changePassword function
+ * changePassword({ email: 'user@example.com', password: 'newPassword123' });
+ */
+export function useChangePassword(options?: ChangePasswordOptions) {
+  const { trigger, data, isMutating, error } = useSWRMutation(
+    CHANGE_PASSWORD_KEY,
+    changePasswordMutation,
+    options
   );
 
-  return { trigger, isMutating, error };
+  return { trigger, data, isMutating, error };
 }

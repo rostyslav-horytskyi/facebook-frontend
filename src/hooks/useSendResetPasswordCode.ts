@@ -1,19 +1,68 @@
-import useSWRMutation from 'swr/mutation';
-import axios from 'axios';
+import useSWRMutation, { SWRMutationConfiguration } from 'swr/mutation';
+import { post } from '../utils/apiClient';
+import { API_CONFIG } from '../config/api.config';
 
-const sendEmailRequest = async (
-  url: string,
+/**
+ * Response from send reset code API
+ */
+export interface SendResetCodeResponse {
+  message: string;
+  success: boolean;
+}
+
+/**
+ * Cache key for send reset code mutation
+ */
+export const SEND_RESET_CODE_KEY = API_CONFIG.AUTH.RESET_PASSWORD;
+
+/**
+ * Sends reset password code to user's email
+ */
+const sendResetCodeMutation = async (
+  key: string,
   { arg: email }: { arg: string }
-) => {
-  const response = await axios.post(url, { email });
-  return response.data;
+): Promise<SendResetCodeResponse> => {
+  try {
+    return await post<SendResetCodeResponse>(key, { email });
+  } catch (error) {
+    // Re-throw for SWR to handle
+    throw error;
+  }
 };
 
-export function useSendResetPasswordCode() {
-  const { trigger, isMutating, error } = useSWRMutation(
-    `${import.meta.env.VITE_BACKEND_URL}/send-reset-password-code`,
-    sendEmailRequest
+/**
+ * Options type for the hook
+ */
+type SendResetCodeOptions = SWRMutationConfiguration<
+  SendResetCodeResponse,
+  Error,
+  string,
+  string
+>;
+
+/**
+ * Hook for sending password reset code to user's email
+ * 
+ * @param options - SWR mutation options
+ * @returns SWR mutation object with trigger function and state
+ * 
+ * @example
+ * const { trigger: sendResetCode, isMutating, error } = useSendResetPasswordCode({
+ *   onSuccess: (response) => {
+ *     // Handle successful code sending
+ *     console.log(response.message);
+ *   }
+ * });
+ * 
+ * // Call sendResetCode function with email
+ * sendResetCode('user@example.com');
+ */
+export function useSendResetPasswordCode(options?: SendResetCodeOptions) {
+  const { trigger, data, isMutating, error } = useSWRMutation(
+    SEND_RESET_CODE_KEY,
+    sendResetCodeMutation,
+    options
   );
 
-  return { trigger, isMutating, error };
+  return { trigger, data, isMutating, error };
 }

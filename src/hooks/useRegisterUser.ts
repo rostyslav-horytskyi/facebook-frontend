@@ -1,11 +1,18 @@
 import type { SWRMutationConfiguration } from 'swr/mutation';
 import useSWRMutation from 'swr/mutation';
-import axios from 'axios';
 import type { LoginInfo } from '../types';
+import { post } from '../utils/apiClient';
+import { API_CONFIG } from '../config/api.config';
 
-type KeyGetter = () => { api: string };
+/**
+ * Type for the SWR cache key
+ */
+type KeyGetter = () => { api: string; endpoint: string };
 
-type Params = {
+/**
+ * Registration parameters
+ */
+export type RegisterParams = {
   first_name: string;
   last_name: string;
   email: string;
@@ -16,22 +23,57 @@ type Params = {
   gender: string;
 };
 
+/**
+ * Gets a unique cache key for registration mutation
+ */
 export const getRegisterKey: KeyGetter = () => ({
   api: 'AccountsApi.registerUser',
+  endpoint: API_CONFIG.AUTH.REGISTER
 });
 
 type MutationKey = ReturnType<typeof getRegisterKey>;
 
-const mutation = async (
-  _: MutationKey,
-  { arg }: { arg: Params }
+/**
+ * Handles the registration API request
+ */
+const registerMutation = async (
+  key: MutationKey,
+  { arg }: { arg: RegisterParams }
 ): Promise<LoginInfo> => {
-  const response = await axios.post(`http://localhost:8000/register`, arg);
-
-  return response.data;
+  try {
+    return await post<LoginInfo>(key.endpoint, arg);
+  } catch (error) {
+    // Convert error to a format SWR can handle
+    throw error;
+  }
 };
 
-type Options = SWRMutationConfiguration<LoginInfo, any, MutationKey, Params>;
+type RegisterOptions = SWRMutationConfiguration<LoginInfo, Error, MutationKey, RegisterParams>;
 
-export const useRegisterUser = (options?: Options) =>
-  useSWRMutation(getRegisterKey(), mutation, options);
+/**
+ * Hook for user registration functionality
+ * 
+ * @param options - SWR mutation options
+ * @returns SWR mutation object with trigger function and state
+ * 
+ * @example
+ * const { trigger: register, isMutating, error } = useRegisterUser({
+ *   onSuccess: (data) => {
+ *     // Handle successful registration
+ *   }
+ * });
+ * 
+ * // Call register function with user data
+ * register({
+ *   first_name: 'John',
+ *   last_name: 'Doe',
+ *   email: 'john@example.com',
+ *   password: 'securepassword',
+ *   bYear: 1990,
+ *   bMonth: 1,
+ *   bDay: 1,
+ *   gender: 'male'
+ * });
+ */
+export const useRegisterUser = (options?: RegisterOptions) =>
+  useSWRMutation(getRegisterKey(), registerMutation, options);

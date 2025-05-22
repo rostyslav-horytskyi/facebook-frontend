@@ -18,8 +18,8 @@ const apiClient = axios.create({
 // Request interceptor to inject token
 apiClient.interceptors.request.use(
   (config) => {
-    // Get token from localStorage (this should be replaced with getting from AuthContext)
-    const token = localStorage.getItem('auth_token');
+    // Get token from localStorage
+    const token = localStorage.getItem('token');
     
     // Add authorization header if token exists
     if (token) {
@@ -40,7 +40,7 @@ apiClient.interceptors.response.use(
       // that falls out of the range of 2xx
       if (error.response.status === 401) {
         // Session expired or unauthorized
-        localStorage.removeItem('auth_token');
+        localStorage.removeItem('token');
         
         // Redirect to login if not already there
         if (!window.location.pathname.includes('/login')) {

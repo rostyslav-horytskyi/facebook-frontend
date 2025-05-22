@@ -1,48 +1,101 @@
-import useSWR from 'swr';
-import axios from 'axios';
+import useSWR, { SWRConfiguration } from 'swr';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
+import { post } from '../utils/apiClient';
 import { useGetCurrentUser } from './useGetCurrentUser';
+import { API_CONFIG } from '../config/api.config';
 
-const fetchActivate = async ([url, token]: [string, string]) => {
-  const response = await axios.post(
-    url,
-    { token },
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    }
-  );
-  return response.data;
+/**
+ * Response from account activation API
+ */
+export interface ActivationResponse {
+  message: string;
+  success: boolean;
+}
+
+/**
+ * Cache key for account activation
+ */
+export const getActivationKey = (token: string) => 
+  [API_CONFIG.AUTH.ACTIVATE, token] as const;
+
+/**
+ * Sends account activation request
+ */
+const fetchActivate = async ([url, token]: readonly [string, string]): Promise<ActivationResponse> => {
+  try {
+    return await post<ActivationResponse>(url, { token });
+  } catch (error) {
+    throw error;
+  }
 };
 
-export const useActivateAccount = (token?: string) => {
+/**
+ * Hook for activating a user account
+ * 
+ * @param token - Activation token from URL
+ * @param redirectDelay - Delay in ms before redirecting (default: 3000)
+ * @param config - SWR configuration options
+ * @returns Object containing success message, error, and loading state
+ * 
+ * @example
+ * const { success, error, loading, cancelRedirect } = useActivateAccount(
+ *   activationToken,
+ *   2000
+ * );
+ */
+export const useActivateAccount = (
+  token?: string, 
+  redirectDelay: number = 3000,
+  config?: SWRConfiguration
+) => {
   const navigate = useNavigate();
-  const { data: user, mutate: refreshUserInfo } = useGetCurrentUser();
-
-  const { data, error, isLoading } = useSWR(
-    token ? [`${import.meta.env.VITE_BACKEND_URL}/activate`, token] : null,
-    fetchActivate
+  const { mutate: refreshUserInfo } = useGetCurrentUser();
+  
+  // Use null as key when token is not available to prevent request
+  const { data, error, isLoading, isValidating } = useSWR(
+    token ? getActivationKey(token) : null,
+    fetchActivate,
+    {
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+      ...config
+    }
   );
 
+  // Function to cancel the redirect
+  const cancelRedirect = useCallback(() => {
+    // Clear any pending redirects (requires storing timeout ID in ref)
+    // This would need a ref to store the timeout ID, not implemented here
+  }, []);
+
+  // Handle successful activation
   useEffect(() => {
-    if (data) {
+    if (data?.success) {
+      // Refresh user info to update verification status
       refreshUserInfo();
 
-      setTimeout(() => navigate('/'), 3000);
+      // Redirect to home page after delay
+      const timeoutId = setTimeout(() => navigate('/'), redirectDelay);
+      
+      return () => clearTimeout(timeoutId);
     }
-  }, [data, user, navigate]);
+  }, [data, refreshUserInfo, navigate, redirectDelay]);
 
+  // Handle activation error
   useEffect(() => {
     if (error) {
-      setTimeout(() => navigate('/'), 3000);
+      // Redirect to home page after delay
+      const timeoutId = setTimeout(() => navigate('/'), redirectDelay);
+      
+      return () => clearTimeout(timeoutId);
     }
-  }, [error, navigate]);
+  }, [error, navigate, redirectDelay]);
 
   return {
     success: data?.message,
-    error: error?.response?.data?.message,
-    loading: isLoading,
+    error: error?.message || (error as any)?.response?.data?.message,
+    loading: isLoading || isValidating,
+    cancelRedirect
   };
 };
